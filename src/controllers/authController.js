@@ -1,11 +1,11 @@
 const {
   validateRegister,
   validateLogin,
-} = require("../validators/auth-validators");
-const userService = require("../services/user-service");
-const bcryptService = require("../services/bcrypt-service");
-const tokenService = require("../services/token-service");
-const createError = require("../utils/create-error");
+} = require("../validators/authValidators");
+const userService = require("../services/userService");
+const bcryptService = require("../services/bcryptService");
+const tokenService = require("../services/tokenService");
+const createError = require("../utils/createError");
 
 exports.register = async (req, res, next) => {
   try {

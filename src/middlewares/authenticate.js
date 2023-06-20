@@ -1,4 +1,4 @@
-const createError = require("../utils/create-error");
+const createError = require("../utils/createError");
 const tokenService = require("../services/token-service");
 const userService = require("../services/user-service");
 
