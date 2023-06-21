@@ -1,17 +1,20 @@
 const {
   validateRegister,
   validateLogin,
-} = require("../validators/auth-validators");
-const userService = require("../services/user-service");
-const bcryptService = require("../services/bcrypt-service");
-const tokenService = require("../services/token-service");
-const createError = require("../utils/create-error");
+} = require("../validators/authValidators");
+const userService = require("../services/userService");
+const bcryptService = require("../services/bcryptService");
+const tokenService = require("../services/tokenService");
+const createError = require("../utils/createError");
 
 exports.register = async (req, res, next) => {
+  console.log("test");
   try {
     // validate
+
     const value = validateRegister(req.body);
-    const isUserExist = await userService.checkEmail(value.email);
+
+    const isUserExist = await userService.checkEmailExist(value.email);
     if (isUserExist) {
       createError("email adress number already in use", 400);
     }
@@ -32,7 +35,9 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const value = validateLogin(req.body);
+
     const user = await userService.getUserByEmail(value.email);
+    console.log(user);
     if (!user) {
       createError("invalid credential", 400);
     }

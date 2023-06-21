@@ -3,8 +3,12 @@ const Joi = require("joi");
 const validate = require("./validate");
 
 const registerSchema = Joi.object({
-  name: Joi.string().trim().required(),
+  firstName: Joi.string().trim().required(),
+  lastName: Joi.string().trim().required(),
   email: Joi.string().email({ tlds: false }),
+  phoneNumber: Joi.string().pattern(/^[0-9]{10}$/),
+  taxId: Joi.string().pattern(/^\d{13}$/),
+  locked: Joi.boolean(),
   password: Joi.string()
     .pattern(/^[a-zA-Z0-9]{6,30}$/)
     .trim()
@@ -18,7 +22,7 @@ const registerSchema = Joi.object({
 });
 
 const loginSchema = Joi.object({
-  emailOrMobile: Joi.string().required(),
+  email: Joi.string().required(),
   password: Joi.string().required(),
 });
 

@@ -1,6 +1,6 @@
-const createError = require("../utils/create-error");
-const tokenService = require("../services/token-service");
-const userService = require("../services/user-service");
+const createError = require("../utils/createError");
+const tokenService = require("../services/tokenService");
+const userService = require("../services/userService");
 
 module.exports = async (req, res, next) => {
   try {
