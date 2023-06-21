@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: true,
         },
       },
+      profileImage: {
+        type: DataTypes.STRING,
+      },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
