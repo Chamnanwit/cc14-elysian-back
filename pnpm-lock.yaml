@@ -37,6 +37,9 @@ dependencies:
   sequelize:
     specifier: ^6.32.1
     version: 6.32.1(mysql2@3.4.0)
+  stripe:
+    specifier: ^12.9.0
+    version: 12.9.0
   twilio:
     specifier: ^4.12.0
     version: 4.12.0
@@ -857,6 +860,14 @@ packages:
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /stripe@12.9.0:
+    resolution: {integrity: sha512-stYtrWetRYUsEbsUVyJaPG9Sppt0ds2szBqXsuDG6KZPPuUmCccbpceLrhoOBwNl1RziEfNB7oG9wg1n2eW+EQ==}
+    engines: {node: '>=12.*'}
+    dependencies:
+      '@types/node': 20.3.1
+      qs: 6.11.0
     dev: false
 
   /toidentifier@1.0.1:
