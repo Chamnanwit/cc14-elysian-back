@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         // allowNull: false,
       },
       locked: {
-        type: DataTypes.ENUM("YES", "NO"),
+        type: DataTypes.BOOLEAN("TRUE", "FALSE"),
         allowNull: false,
       },
     },

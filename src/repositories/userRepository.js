@@ -1,7 +1,7 @@
 const { User } = require("../models");
 
 exports.getUserByEmail = (email) => {
-  User.findOne({
+  return User.findOne({
     where: {
       email: email,
     },
@@ -9,3 +9,5 @@ exports.getUserByEmail = (email) => {
 };
 
 exports.createUser = (user) => User.create(user);
+
+exports.getUserById = (id) => User.findByPk(id);

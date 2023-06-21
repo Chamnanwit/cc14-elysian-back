@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-// const morgan = require("morgan");
+const morgan = require("morgan");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
@@ -11,7 +11,7 @@ const app = express();
 
 app.use(cors());
 
-// app.use(morgan())
+app.use(morgan());
 
 app.use(
   rateLimit({
@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-// app.use(helmet());
+app.use(helmet());
 
 app.use(express.json());
 
