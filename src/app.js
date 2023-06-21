@@ -5,7 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
-const authRoute = require("./routes/auth-route");
+const authRoute = require("./routes/authRoute");
 
 const app = express();
 

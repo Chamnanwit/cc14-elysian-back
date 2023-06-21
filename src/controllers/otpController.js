@@ -1,5 +1,6 @@
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
+const serviceId = process.env.TWILIO_SERVICE_ID;
 const client = require('twilio')(accountSid, authToken);
 
 // <=== function request OTP ===>
@@ -14,20 +15,22 @@ exports.otp = async (req, res, next) => {
 	if (phoneNumber.length === 9) {
 		try {
 			const customerPhoneNumber = await client.verify.v2
-				.services(process.env.TWILIO_ACCOUNT_SID)
+				.services(serviceId)
 				.verifications.create({
 					to: `+66${phoneNumber}`,
 					channel: 'sms',
 				});
-			console.log(customerPhoneNumber);
+			console.log(customerPhoneNumber,"CustomerNumber");
 
 			res.status(200).json({
 				message: `Verification is sent to 0${phoneNumber}`,
 				customerPhoneNumber: customerPhoneNumber.to,
 			});
 		} catch (err) {
+			console.log("eieiei")
 			next(err);
 		}
+
 	} else {
 		res.status(400).json({ message: 'Wrong Number!' });
 	}
@@ -43,7 +46,7 @@ exports.verify = async (req, res, next) => {
 	if (code.length === 6) {
 		try {
 			const data = await client.verify.v2
-				.services(process.env.TWILIO_ACCOUNT_SID)
+				.services(serviceId)
 				.verificationChecks.create({
 					to: `${phoneNumber}`,
 					code: code,
