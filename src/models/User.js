@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           is: /^[0-9]{10}$/,
         },
-        taxId: {
-          type: DataTypes.STRING,
-          unique: true,
-          allowNull: false,
-        },
+      },
+      taxId: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
