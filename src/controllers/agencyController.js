@@ -2,6 +2,7 @@ const { Property } = require("../models");
 
 exports.createProperty = async (req, res, next) => {
   try {
+    console.log(req.body);
     const {
       name,
       price,
@@ -17,6 +18,9 @@ exports.createProperty = async (req, res, next) => {
       rentPeriod,
       locked,
       published,
+      userId,
+      roomTypeId,
+      subDistrictId,
     } = req.body;
 
     const property = await Property.create({
@@ -34,9 +38,12 @@ exports.createProperty = async (req, res, next) => {
       rentPeriod: rentPeriod,
       locked: locked,
       published: published,
+      userId: userId,
+      roomTypeId: roomTypeId,
+      subDistrictId: subDistrictId,
     });
 
-    res.status(201).json({ post });
+    res.status(201).json({ msg: "success" });
   } catch (err) {
     next(err);
   }
@@ -44,9 +51,10 @@ exports.createProperty = async (req, res, next) => {
 
 exports.getPropertyList = async () => {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
+    console.log(req.body);
 
-    Property.findOne({
+    const PropertyList = await Property.findOne({
       attributes: [
         name,
         price,
