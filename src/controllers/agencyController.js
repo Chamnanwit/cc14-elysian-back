@@ -41,3 +41,43 @@ exports.createProperty = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getPropertyList = async () => {
+  try {
+    const { id } = req.params;
+
+    Property.findOne({
+      attributes: [
+        name,
+        price,
+        floor,
+        totalArea,
+        totalUnit,
+        totalBedroom,
+        totalBathroom,
+        totalKitchen,
+        description,
+        latitude,
+        longitude,
+        rentPeriod,
+        locked,
+        published,
+        userId,
+        roomTypeId,
+        subDistrictId,
+      ],
+      where: { id: id },
+    });
+
+    res.status(200).json(rs);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getAgencyProfile = async () => {
+  try {
+  } catch (err) {
+    next(err);
+  }
+};

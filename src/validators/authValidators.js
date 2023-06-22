@@ -19,6 +19,7 @@ const registerSchema = Joi.object({
     .required()
     .strip(),
   role: Joi.string(),
+  profileImage: Joi.string(),
 });
 
 const loginSchema = Joi.object({
