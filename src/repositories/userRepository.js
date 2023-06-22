@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Property } = require("../models");
 
 exports.getUserByEmail = (email) => {
   return User.findOne({
@@ -11,3 +11,5 @@ exports.getUserByEmail = (email) => {
 exports.createUser = (user) => User.create(user);
 
 exports.getUserById = (id) => User.findByPk(id);
+
+exports.createProperty = (property) => Property.create(property);

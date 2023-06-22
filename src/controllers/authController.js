@@ -8,7 +8,6 @@ const tokenService = require("../services/tokenService");
 const createError = require("../utils/createError");
 
 exports.register = async (req, res, next) => {
-  console.log("test");
   try {
     // validate
 
