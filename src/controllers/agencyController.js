@@ -2,6 +2,7 @@ const { Property } = require("../models");
 
 exports.createProperty = async (req, res, next) => {
   try {
+    // console.log(req.body);
     const {
       name,
       price,
@@ -17,6 +18,9 @@ exports.createProperty = async (req, res, next) => {
       rentPeriod,
       locked,
       published,
+      userId,
+      roomTypeId,
+      subDistrictId,
     } = req.body;
 
     const property = await Property.create({
@@ -34,50 +38,53 @@ exports.createProperty = async (req, res, next) => {
       rentPeriod: rentPeriod,
       locked: locked,
       published: published,
+      userId: userId,
+      roomTypeId: roomTypeId,
+      subDistrictId: subDistrictId,
     });
 
-    res.status(201).json({ post });
+    res.status(201).json({ msg: "success" });
   } catch (err) {
     next(err);
   }
 };
 
-exports.getPropertyList = async () => {
+exports.getPropertyList = async (req, res, next) => {
   try {
     const { id } = req.params;
-
-    Property.findOne({
+    // console.log(req);
+    const PropertyList = await Property.findAll({
       attributes: [
-        name,
-        price,
-        floor,
-        totalArea,
-        totalUnit,
-        totalBedroom,
-        totalBathroom,
-        totalKitchen,
-        description,
-        latitude,
-        longitude,
-        rentPeriod,
-        locked,
-        published,
-        userId,
-        roomTypeId,
-        subDistrictId,
+        "name",
+        "price",
+        "floor",
+        "totalArea",
+        "totalUnit",
+        "totalBedroom",
+        "totalBathroom",
+        "totalKitchen",
+        "description",
+        "latitude",
+        "longitude",
+        "rentPeriod",
+        "locked",
+        "published",
+        "userId",
+        "roomTypeId",
+        "subDistrictId",
       ],
       where: { id: id },
     });
 
-    res.status(200).json(rs);
+    res.status(200).json(PropertyList);
   } catch (err) {
     next(err);
   }
 };
 
-exports.getAgencyProfile = async () => {
-  try {
-  } catch (err) {
-    next(err);
-  }
-};
+// exports.getAgencyProfile = async () => {
+//   try {
+//   } catch (err) {
+//     next(err);
+//   }
+// };
