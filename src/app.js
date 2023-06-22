@@ -6,6 +6,7 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
 const authRoute = require("./routes/authRoute");
+const agencyRoute = require("./routes/agencyRoute");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.use("/auth", authRoute);
+app.use("/agent", agencyRoute);
 
 const port = process.env.PORT || 8000;
 
