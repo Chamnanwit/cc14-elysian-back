@@ -50,7 +50,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM("DAILY", "MONTHLY", "YEARLY"),
       },
       locked: {
-        type: DataTypes.ENUM("YES", "NO"),
+        type: DataTypes.BOOLEAN("TRUE", "FALSE"),
+        allowNull: false,
       },
       published: {
         type: DataTypes.ENUM("YES", "NO"),
