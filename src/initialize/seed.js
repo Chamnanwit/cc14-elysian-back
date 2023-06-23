@@ -1,4 +1,4 @@
-const { User, RoomType } = require("../models");
+const { User, RoomType, PricingPlan } = require("../models");
 // const bcrypt = require("bcryptjs");
 
 // const userSeed = async () => {
@@ -33,3 +33,48 @@ const roomTypeSeed = async () => {
 };
 
 roomTypeSeed();
+
+const pricingPlanSeed = async () => {
+  const pricingPlanData = [
+    {
+      id: 1,
+      name: "Free",
+      planType: "FREE",
+      price: 0,
+      expiration: "WEEKLY",
+      topStatus: "DISABLE",
+      locked: "YES",
+      limit: 5,
+      numberOfTop: 0,
+      status: "ENABLE",
+    },
+    {
+      id: 2,
+      name: "Gold",
+      planType: "GOLD",
+      price: 49.99,
+      expiration: "MONTHLY",
+      topStatus: "ENABLE",
+      locked: "YES",
+      limit: 20,
+      numberOfTop: 5,
+      status: "ENABLE",
+    },
+    {
+      id: 3,
+      name: "Premium",
+      planType: "PREMIUM",
+      price: 99.99,
+      expiration: "WEEKLY",
+      topStatus: "DISABLE",
+      locked: "YES",
+      limit: 50,
+      numberOfTop: 10,
+      status: "DISABLE",
+    },
+  ];
+  let res = await PricingPlan.bulkCreate(pricingPlanData);
+  process.exit(0);
+};
+
+pricingPlanSeed();
