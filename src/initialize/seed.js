@@ -43,10 +43,10 @@ const pricingPlanSeed = async () => {
       price: 0,
       expiration: "WEEKLY",
       topStatus: "DISABLE",
-      locked: "YES",
       limit: 5,
+      locked: 1,
       numberOfTop: 0,
-      status: "ENABLE",
+      status: "ACTIVE",
     },
     {
       id: 2,
@@ -55,10 +55,10 @@ const pricingPlanSeed = async () => {
       price: 49.99,
       expiration: "MONTHLY",
       topStatus: "ENABLE",
-      locked: "YES",
       limit: 20,
+      locked: 1,
       numberOfTop: 5,
-      status: "ENABLE",
+      status: "ACTIVE",
     },
     {
       id: 3,
@@ -67,10 +67,10 @@ const pricingPlanSeed = async () => {
       price: 99.99,
       expiration: "WEEKLY",
       topStatus: "DISABLE",
-      locked: "YES",
       limit: 50,
+      locked: 0,
       numberOfTop: 10,
-      status: "DISABLE",
+      status: "ACTIVE",
     },
   ];
   let res = await PricingPlan.bulkCreate(pricingPlanData);
