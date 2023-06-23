@@ -54,3 +54,27 @@ exports.getPricingPlanList = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getAllPricingPlanList = async (req, res, next) => {
+  try {
+    // const { id } = req.params;
+    // console.log(req.params);
+
+    const AllPricingPlanList = await PricingPlan.findAll({
+      attributes: [
+        "name",
+        "planType",
+        "price",
+        "limit",
+        "expiration",
+        "topStatus",
+        "locked",
+        "numberOfTop",
+      ],
+    });
+
+    res.status(200).json(AllPricingPlanList);
+  } catch (err) {
+    next(err);
+  }
+};
