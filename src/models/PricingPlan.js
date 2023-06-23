@@ -21,11 +21,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM("WEEKLY", "MONTHLY"),
       },
       locked: {
-        type: DataTypes.ENUM("DISABLE", "ENABLE"),
+        type: DataTypes.BOOLEAN("TRUE", "FALSE"),
+        allowNull: false,
       },
       numberOfTop: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM("ACTIVE", "INACTIVE"),
+        allowNull: false,
+        defaultValue: "ACTIVE",
+        paranoid: true,
       },
     },
     {

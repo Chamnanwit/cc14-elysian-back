@@ -1,4 +1,4 @@
-const { User, Property, PricingPlan } = require("../models");
+const { PricingPlan } = require("../models");
 
 exports.createPackage = (package) => PricingPlan.create(package);
 
