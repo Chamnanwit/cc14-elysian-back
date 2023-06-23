@@ -1,28 +1,12 @@
 const { PricingPlan } = require("../models");
 
+const adminService = require("../services/adminService");
+
 exports.createPricingPlan = async (req, res, next) => {
   try {
-    const {
-      name,
-      planType,
-      price,
-      limit,
-      expiration,
-      topStatus,
-      locked,
-      numberOfTop,
-    } = req.body;
+    const value = req.body;
 
-    const pricingplan = await PricingPlan.create({
-      name: name,
-      planType: planType,
-      price: price,
-      limit: limit,
-      expiration: expiration,
-      topStatus: topStatus,
-      locked: locked,
-      numberOfTop: numberOfTop,
-    });
+    const package = await adminService.createPackage(value);
 
     res.status(201).json({ msg: "success" });
   } catch (err) {
@@ -30,50 +14,21 @@ exports.createPricingPlan = async (req, res, next) => {
   }
 };
 
-exports.getPricingPlanList = async (req, res, next) => {
+exports.getPricingPlanById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    // console.log(req.params);
-
-    const PricingPlanList = await PricingPlan.findOne({
-      attributes: [
-        "name",
-        "planType",
-        "price",
-        "limit",
-        "expiration",
-        "topStatus",
-        "locked",
-        "numberOfTop",
-      ],
-      where: { id: id },
-    });
-
-    res.status(200).json(PricingPlanList);
+    const result = await adminService.getPackageById(id);
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }
 };
 
-exports.getAllPricingPlanList = async (req, res, next) => {
+exports.getAllPricingPlan = async (req, res, next) => {
   try {
-    // const { id } = req.params;
-    // console.log(req.params);
+    const result = await adminService.getAllPricingPlan();
 
-    const AllPricingPlanList = await PricingPlan.findAll({
-      attributes: [
-        "name",
-        "planType",
-        "price",
-        "limit",
-        "expiration",
-        "topStatus",
-        "locked",
-        "numberOfTop",
-      ],
-    });
-
-    res.status(200).json(AllPricingPlanList);
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }
