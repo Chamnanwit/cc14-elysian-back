@@ -1,21 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
-  const AssingPicingPlan = sequelize.define(
-    "AssingPicingPlan",
+  const AssingPricingPlan = sequelize.define(
+    "AssingPricingPlan",
     {},
     {
       timestamps: true,
       underscored: true,
     }
   );
-  AssingPicingPlan.associate = (db) => {
-    AssingPicingPlan.belongsTo(db.PicingPlan, {
+  AssingPricingPlan.associate = (db) => {
+    AssingPricingPlan.belongsTo(db.PricingPlan, {
       foreignKey: {
-        name: "picingPlanId",
+        name: "pricingPlanId",
         allowNull: false,
       },
       onDelete: "Restrict",
       onUpdate: "Restrict",
     });
   };
-  return AssingPicingPlan;
+  return AssingPricingPlan;
 };

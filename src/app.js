@@ -7,6 +7,7 @@ const rateLimit = require("express-rate-limit");
 
 const authRoute = require("./routes/authRoute");
 const agencyRoute = require("./routes/agencyRoute");
+const adminRoute = require("./routes/adminRoute");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 app.use("/agent", agencyRoute);
+app.use("/admin", adminRoute);
 
 const port = process.env.PORT || 8000;
 

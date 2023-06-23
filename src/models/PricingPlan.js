@@ -1,10 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-  const PicingPlan = sequelize.define(
-    "PicingPlan",
+  const PricingPlan = sequelize.define(
+    "PricingPlan",
     {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      planType: {
+        type: DataTypes.ENUM("FREE", "GOLD", "PREMIUM"),
       },
       price: {
         type: DataTypes.DECIMAL(7, 2),
@@ -33,24 +36,24 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  PicingPlan.associate = (db) => {
-    PicingPlan.hasMany(db.AssingPicingPlan, {
+  PricingPlan.associate = (db) => {
+    PricingPlan.hasMany(db.AssingPricingPlan, {
       foreignKey: {
-        name: "picingPlanId",
+        name: "pricingPlanId",
         allowNull: false,
       },
       onDelete: "Restrict",
       onUpdate: "Restrict",
     });
 
-    PicingPlan.hasMany(db.PurchaseHistory, {
+    PricingPlan.hasMany(db.PurchaseHistory, {
       foreignKey: {
-        name: "picingPlanId",
+        name: "pricingPlanId",
         allowNull: false,
       },
       onDelete: "Restrict",
       onUpdate: "Restrict",
     });
   };
-  return PicingPlan;
+  return PricingPlan;
 };

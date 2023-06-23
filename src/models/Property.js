@@ -40,11 +40,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       latitude: {
         type: DataTypes.DECIMAL(8, 6),
-        allowNull: false,
+        allowNull: true,
       },
       longitude: {
         type: DataTypes.DECIMAL(9, 6),
-        allowNull: false,
+        allowNull: true,
       },
       rentPeriod: {
         type: DataTypes.ENUM("DAILY", "MONTHLY", "YEARLY"),
@@ -54,7 +54,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       published: {
-        type: DataTypes.ENUM("YES", "NO"),
+        type: DataTypes.BOOLEAN("TRUE", "FALSE"),
+      },
+      topStatus: {
+        type: DataTypes.BOOLEAN("TRUE", "FALSE"),
       },
       // subDistricId: {
       //   type: DataTypes.STRING,

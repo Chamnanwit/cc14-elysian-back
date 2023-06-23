@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   PurchaseHistory.associate = (db) => {
-    PurchaseHistory.belongsTo(db.PicingPlan, {
+    PurchaseHistory.belongsTo(db.PricingPlan, {
       foreignKey: {
-        name: "picingPlanId",
+        name: "pricingPlanId",
         allowNull: false,
       },
       onDelete: "Restrict",
