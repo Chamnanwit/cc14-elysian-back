@@ -59,18 +59,6 @@ module.exports = (sequelize, DataTypes) => {
       topStatus: {
         type: DataTypes.BOOLEAN("TRUE", "FALSE"),
       },
-      // subDistricId: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
-      // roomTypeId: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
-      //   userId: {
-      //     type: DataTypes.STRING,
-      //     allowNull: false,
-      //   },
     },
     {
       timestamps: true,
