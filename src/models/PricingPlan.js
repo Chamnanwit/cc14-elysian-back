@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       numberOfTop: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        defaultValue: 0,
       },
       status: {
         type: DataTypes.ENUM("ACTIVE", "INACTIVE"),
