@@ -8,3 +8,6 @@ exports.getPackageById = (id) => adminRepository.getPackageById(id);
 exports.getAllPricingPlan = () => adminRepository.getAllPricingPlan();
 
 exports.deletePricingPlan = (id) => adminRepository.deletePricingPlan(id);
+
+exports.updatePricingPlan = (updatePackage, id) =>
+  adminRepository.updatePricingPlan(updatePackage, id);
