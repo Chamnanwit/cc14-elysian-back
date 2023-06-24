@@ -1,4 +1,10 @@
-const { Property } = require("../models");
+const {
+  User,
+  Property,
+  SubDistrict,
+  District,
+  Province,
+} = require("../models");
 
 exports.createProperty = (property) => Property.create(property);
 
@@ -9,6 +15,22 @@ exports.getPropertyById = (id) => {
     where: {
       id: id,
     },
+    include: [
+      {
+        model: SubDistrict,
+        include: [
+          {
+            model: District,
+            include: {
+              model: Province,
+            },
+          },
+        ],
+      },
+      {
+        model: User,
+      },
+    ],
   });
 };
 

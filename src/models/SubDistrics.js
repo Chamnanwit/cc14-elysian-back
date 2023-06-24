@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
       nameInThai: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
       },
       nameInEnglish: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        allowNull: true,
+        // unique: true,
       },
       latitude: {
         type: DataTypes.DECIMAL(8, 6),
