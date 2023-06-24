@@ -8,7 +8,7 @@ router.post("/create-pricing-plan", adminController.createPricingPlan);
 router.get("/pricing-plan", adminController.getAllPricingPlan);
 router.get("/pricing-plan/:id", adminController.getPricingPlanById);
 router.delete("/delete-pricing-plan/:id", adminController.deletePricingPlan);
-router.put("/update-pricing-plan/:id", adminController.updatePricingPlan);
+// router.put("/update-pricing-plan/:id", adminController.updatePricingPlan);
 
 module.exports = router;
 
