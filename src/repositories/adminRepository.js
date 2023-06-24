@@ -21,3 +21,11 @@ exports.deletePricingPlan = (id) => {
     },
   });
 };
+
+exports.updatePricingPlan = (updatePackage, id) => {
+  return PricingPlan.update(updatePackage, {
+    where: {
+      id: id,
+    },
+  });
+};
