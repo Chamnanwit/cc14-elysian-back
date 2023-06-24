@@ -9,5 +9,5 @@ exports.getAllPricingPlan = () => adminRepository.getAllPricingPlan();
 
 exports.deletePricingPlan = (id) => adminRepository.deletePricingPlan(id);
 
-exports.updatePricingPlan = (updatePackage, id) =>
-  adminRepository.updatePricingPlan(updatePackage, id);
+exports.updatePricingPlan = (updatePackage) =>
+  adminRepository.updatePricingPlan(updatePackage);
