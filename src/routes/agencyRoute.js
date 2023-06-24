@@ -7,6 +7,6 @@ const router = express.Router();
 router.post("/properties", agencyController.createProperty);
 router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
-// router.get("/properties/:id", agencyController.getPropertyList);
+router.delete("/properties/:id", agencyController.deleteProperty);
 
 module.exports = router;

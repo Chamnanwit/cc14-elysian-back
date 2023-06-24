@@ -6,3 +6,5 @@ exports.createPackage = (package) => adminRepository.createPackage(package);
 exports.getPackageById = (id) => adminRepository.getPackageById(id);
 
 exports.getAllPricingPlan = () => adminRepository.getAllPricingPlan();
+
+exports.deletePricingPlan = (id) => adminRepository.deletePricingPlan(id);

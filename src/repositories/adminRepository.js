@@ -13,3 +13,11 @@ exports.getPackageById = (id) => {
 };
 
 exports.getAllPricingPlan = () => PricingPlan.findAll();
+
+exports.deletePricingPlan = (id) => {
+  return PricingPlan.destroy({
+    where: {
+      id: id,
+    },
+  });
+};

@@ -41,6 +41,7 @@ exports.deleteProperty = async (req, res, next) => {
     const { id } = req.params;
 
     const result = await agencyService.deleteProperty(id);
+    res.status(200).json({ message: "delete success" });
   } catch (err) {
     next(err);
   }
