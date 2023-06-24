@@ -1,4 +1,7 @@
 const { Property } = require("../models");
+const agencyService = require("../services/agencyService");
+const cloudinary = require("../config/cloudinary");
+const fs = require("fs");
 
 exports.createProperty = async (req, res, next) => {
   try {
@@ -143,3 +146,35 @@ exports.getPropertyList = async (req, res, next) => {
 //     })
 //     .catch(next);
 // };
+
+exports.uploadProperty = async (req, res, next) => {
+  try {
+    const multiupload = async (files) => {
+      console.log(files);
+      const uploadMultiFiles = [];
+      for (let file of files) {
+        const result = await cloudinary.uploader.upload(file.path);
+        uploadMultiFiles.push(result.secure_url);
+      }
+      return uploadMultiFiles;
+    };
+    const {  propertyId } = req.params;
+    console.log(req.files);
+    await multiupload(req.files).then(async (uploadMultiFiles) => {
+      const imgArr = uploadMultiFiles.map((el) => {
+        const obj = { propertyId: propertyId, imageLink: el };
+        return obj;
+      });
+      const rs = await agencyService.uploadMultiFiles(imgArr);
+      res.json(rs);
+    });
+  } catch (err) {
+    next(err);
+  } finally {
+    if(req.files) {
+      for (let file of req.files) {
+        fs.unlinkSync(file.path);
+      }
+    }
+  }
+};
