@@ -41,3 +41,11 @@ exports.deleteProperty = (id) => {
     },
   });
 };
+
+exports.updateProfileAgency = (updateProfile) => {
+  return User.update(updateProfile, {
+    where: {
+      id: updateProfile.id,
+    },
+  });
+};

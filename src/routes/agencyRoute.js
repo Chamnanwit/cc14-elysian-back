@@ -8,5 +8,6 @@ router.post("/properties", agencyController.createProperty);
 router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
 router.delete("/properties/:id", agencyController.deleteProperty);
+router.patch("/update-profileagency", agencyController.updateProfileAgency);
 
 module.exports = router;
