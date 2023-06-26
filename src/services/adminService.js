@@ -9,9 +9,6 @@ exports.getAllPricingPlan = () => adminRepository.getAllPricingPlan();
 
 exports.deletePricingPlan = (id) => adminRepository.deletePricingPlan(id);
 
-exports.updatePricingPlan = (updatePackage, id) =>
-  adminRepository.updatePricingPlan(updatePackage, id);
-
 exports.createOptionalType = (optionalType) =>
   adminRepository.createOptionalType(optionalType);
 
@@ -34,3 +31,6 @@ exports.deleteOptional = (id) => adminRepository.deleteOptional(id);
 
 exports.updateOptional = (updateOptional, id) =>
   adminRepository.updateOptional(updateOptional, id);
+
+exports.updatePricingPlan = (updatePackage) =>
+  adminRepository.updatePricingPlan(updatePackage);

@@ -8,7 +8,7 @@ router.post("/create-pricing-plan", adminController.createPricingPlan);
 router.get("/pricing-plan", adminController.getAllPricingPlan);
 router.get("/pricing-plan/:id", adminController.getPricingPlanById);
 router.delete("/delete-pricing-plan/:id", adminController.deletePricingPlan);
-router.patch("/update-pricing-plan/:id", adminController.updatePricingPlan);
+router.patch("/update-pricing-plan", adminController.updatePricingPlan);
 
 router.post("/create-optionaltype", adminController.createOptionalType);
 router.get("/optionaltype", adminController.getAllOptionalType);

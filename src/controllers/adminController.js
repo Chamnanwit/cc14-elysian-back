@@ -55,9 +55,9 @@ exports.deletePricingPlan = async (req, res, next) => {
 exports.updatePricingPlan = async (req, res, next) => {
   try {
     const updatePackage = req.body;
-    const id = req.params.id;
+    // const id = req.params.id;
 
-    const result = await adminService.updatePricingPlan(updatePackage, id);
+    const result = await adminService.updatePricingPlan(updatePackage);
 
     res.status(200).json({ message: "update success" });
   } catch (err) {

@@ -22,10 +22,10 @@ exports.deletePricingPlan = (id) => {
   });
 };
 
-exports.updatePricingPlan = (updatePackage, id) => {
+exports.updatePricingPlan = (updatePackage) => {
   return PricingPlan.update(updatePackage, {
     where: {
-      id: id,
+      id: updatePackage.id,
     },
   });
 };
