@@ -10,9 +10,16 @@ router.get("/pricing-plan/:id", adminController.getPricingPlanById);
 router.delete("/delete-pricing-plan/:id", adminController.deletePricingPlan);
 router.patch("/update-pricing-plan", adminController.updatePricingPlan);
 
-module.exports = router;
+router.post("/create-optionaltype", adminController.createOptionalType);
+router.get("/optionaltype", adminController.getAllOptionalType);
+router.get("/optionaltype/:id", adminController.getOptionalTypeById);
+router.delete("/delete-optionaltype/:id", adminController.deleteOptionalType);
+router.patch("/update-optionaltype/:id", adminController.updateOptionalType);
 
-// export const updatePricingPlan = (id, updatePricingPlanObj) =>
-//   axios.put(`/admin/update-pricing-plan/${id}`, updatePricingPlanObj);
-// export const deletePricingPlan = (id) =>
-//   axios.delete(`/admin/delete-pricing-plan/${id}`);
+router.post("/create-optional", adminController.createOptional);
+router.get("/optional", adminController.getAllOptional);
+router.get("/optional/:id", adminController.getOptionalById);
+router.delete("/delete-optional/:id", adminController.deleteOptional);
+router.patch("/update-optional/:id", adminController.updateOptional);
+
+module.exports = router;
