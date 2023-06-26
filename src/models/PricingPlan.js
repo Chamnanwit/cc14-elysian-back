@@ -33,9 +33,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: "ACTIVE",
       },
-      paranoid: true,
     },
     {
+      paranoid: true,
       timestamps: true,
       underscored: true,
     }
