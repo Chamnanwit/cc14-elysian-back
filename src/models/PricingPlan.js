@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: "ACTIVE",
       },
+      paranoid: true,
     },
     {
       timestamps: true,
