@@ -51,10 +51,10 @@ exports.deleteOptionalType = (id) => {
   });
 };
 
-exports.updateOptionalType = (updateOptionalType, id) => {
+exports.updateOptionalType = (updateOptionalType) => {
   return OptionalType.update(updateOptionalType, {
     where: {
-      id: id,
+      id: updateOptionalType.id,
     },
   });
 };
@@ -79,10 +79,10 @@ exports.deleteOptional = (id) => {
   });
 };
 
-exports.updateOptional = (updateOptional, id) => {
+exports.updateOptional = (updateOptional) => {
   return Optional.update(updateOptional, {
     where: {
-      id: id,
+      id: updateOptional.id,
     },
   });
 };
