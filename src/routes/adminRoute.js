@@ -22,4 +22,6 @@ router.get("/optional/:id", adminController.getOptionalById);
 router.delete("/delete-optional/:id", adminController.deleteOptional);
 router.patch("/update-optional", adminController.updateOptional);
 
+router.patch("/update-profileadmin", adminController.updateProfileAdmin);
+
 module.exports = router;

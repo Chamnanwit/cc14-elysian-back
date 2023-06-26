@@ -1,4 +1,4 @@
-const { PricingPlan, OptionalType, Optional } = require("../models");
+const { User, PricingPlan, OptionalType, Optional } = require("../models");
 
 exports.createPackage = (package) => PricingPlan.create(package);
 
@@ -83,6 +83,14 @@ exports.updateOptional = (updateOptional, id) => {
   return Optional.update(updateOptional, {
     where: {
       id: id,
+    },
+  });
+};
+
+exports.updateProfileAdmin = (updateProfile) => {
+  return User.update(updateProfile, {
+    where: {
+      id: updateProfile.id,
     },
   });
 };
