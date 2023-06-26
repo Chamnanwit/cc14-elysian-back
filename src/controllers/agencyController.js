@@ -41,32 +41,13 @@ exports.deleteProperty = async (req, res, next) => {
     const { id } = req.params;
 
     const result = await agencyService.deleteProperty(id);
+
+    if (result === 0) {
+      throw new Error("Cannot Delete!!");
+    }
+
     res.status(200).json({ message: "delete success" });
   } catch (err) {
     next(err);
   }
 };
-
-// exports.updateContent = (req, res, next) => {
-//   const { id } = req.params;
-//   const {
-//     title,
-//     supTitle,
-//     image,
-//     ingredients,
-//     directions,
-//     cardId,
-//     userId,
-//     typefoodId,
-//   } = req.body;
-//   Content.update(
-//     { ...req.body, userId: req.user.id },
-//     {
-//       where: { id: id },
-//     }
-//   )
-//     .then((rs) => {
-//       res.status(200).json(rs);
-//     })
-//     .catch(next);
-// };

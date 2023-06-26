@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   OptionalType.associate = (db) => {
-    OptionalType.belongsTo(db.Optional, {
+    OptionalType.hasMany(db.Optional, {
       foreignKey: {
         name: "optionalTypeId",
         allowNull: false,

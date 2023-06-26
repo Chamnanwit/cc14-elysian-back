@@ -9,6 +9,9 @@ const authRoute = require("./routes/authRoute");
 const agencyRoute = require("./routes/agencyRoute");
 const adminRoute = require("./routes/adminRoute");
 
+const notFoundMiddleware = require("./middlewares/not-found");
+const errorMiddleware = require("./middlewares/error");
+
 const app = express();
 
 app.use(cors());
@@ -30,6 +33,9 @@ app.use(express.json());
 app.use("/auth", authRoute);
 app.use("/agent", agencyRoute);
 app.use("/admin", adminRoute);
+
+app.use(notFoundMiddleware);
+app.use(errorMiddleware);
 
 const port = process.env.PORT || 8000;
 
