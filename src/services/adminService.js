@@ -34,3 +34,6 @@ exports.deleteOptional = (id) => adminRepository.deleteOptional(id);
 
 exports.updateOptional = (updateOptional, id) =>
   adminRepository.updateOptional(updateOptional, id);
+
+exports.updateProfileAdmin = (updateProfile) =>
+  adminRepository.updateProfileAdmin(updateProfile);

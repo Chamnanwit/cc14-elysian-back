@@ -193,3 +193,15 @@ exports.updateOptional = async (req, res, next) => {
     next;
   }
 };
+
+exports.updateProfileAdmin = async (req, res, next) => {
+  try {
+    const updateProfile = req.body;
+
+    const result = await adminService.updateProfileAdmin(updateProfile);
+
+    res.status(200).json({ message: "update success" });
+  } catch (err) {
+    next;
+  }
+};
