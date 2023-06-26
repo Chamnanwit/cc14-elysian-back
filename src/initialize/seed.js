@@ -1,4 +1,4 @@
-const { User, RoomType, PricingPlan } = require("../models");
+const { RoomType, PricingPlan, OptionalType } = require("../models");
 
 const roomTypeSeed = async () => {
   const roomTypeData = [
@@ -58,3 +58,22 @@ const pricingPlanSeed = async () => {
 };
 
 pricingPlanSeed();
+
+const optionalTypeSeed = async () => {
+  const optionalTypeData = [
+    { id: 1, name: "เครื่องปรับอากาศ", type: "ROOM" },
+    { id: 2, name: "TV", type: "ROOM" },
+    { id: 3, name: "ตู้เย็น", type: "ROOM" },
+    { id: 4, name: "เครื่องทำน้ำอุ่น", type: "ROOM" },
+    { id: 5, name: "เครื่องซักผ้า", type: "ROOM" },
+    { id: 6, name: "สระว่ายน้ำ", type: "COMMON" },
+    { id: 7, name: "ฟิตเนส", type: "COMMON" },
+    { id: 8, name: "สวน", type: "COMMON" },
+    { id: 9, name: "ครัว", type: "COMMON" },
+    { id: 10, name: "Co-working Space", type: "COMMON" },
+  ];
+  let res = await OptionalType.bulkCreate(optionalTypeData);
+  process.exit(0);
+};
+
+optionalTypeSeed();
