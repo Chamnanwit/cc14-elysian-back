@@ -8,3 +8,6 @@ exports.getPropertyById = (id) => agencyRepository.getPropertyById(id);
 exports.getAllProperty = () => agencyRepository.getAllProperty();
 
 exports.deleteProperty = (id) => agencyRepository.deleteProperty(id);
+
+exports.updateProfileAgency = (updateProfile) =>
+  agencyRepository.updateProfileAgency(updateProfile);

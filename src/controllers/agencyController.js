@@ -51,3 +51,16 @@ exports.deleteProperty = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateProfileAgency = async (req, res, next) => {
+  try {
+    const updateProfile = req.body;
+    // const id = req.params.id;
+
+    const result = await agencyService.updateProfileAgency(updateProfile);
+
+    res.status(200).json({ message: "update success" });
+  } catch (err) {
+    next;
+  }
+};
