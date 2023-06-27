@@ -64,8 +64,8 @@ exports.checkMe = async (req, res, next) => {
 
   const isUserExist = await userService.checkEmailExist(value.email);
   if (isUserExist) {
-    res.status(200).json({ emaiStatus: "Yes" });
+    res.status(200).json({ emailStatus: "Yes" });
   } else {
-    res.status(200).json({ emaiStatus: "No" });
+    res.status(200).json({ emailStatus: "No" });
   }
 };

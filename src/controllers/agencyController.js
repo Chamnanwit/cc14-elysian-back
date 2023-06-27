@@ -84,3 +84,19 @@ exports.getAllFromAgency = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.deleteProfileAgency = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await agencyService.deleteProfileAgency(id);
+
+    if (result === 0) {
+      throw new Error("Cannot Delete!!");
+    }
+
+    res.status(200).json({ message: "delete success" });
+  } catch (err) {
+    next(err);
+  }
+};
