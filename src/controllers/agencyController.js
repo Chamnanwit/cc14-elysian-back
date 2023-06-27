@@ -3,8 +3,6 @@ const agencyService = require("../services/agencyService");
 const cloudinary = require("../config/cloudinary");
 const fs = require("fs");
 
-const agencyService = require("../services/agencyService");
-
 exports.createProperty = async (req, res, next) => {
   try {
     const value = req.body;
