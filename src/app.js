@@ -6,6 +6,7 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
 const authRoute = require("./routes/authRoute");
+const userRoute = require("./routes/userRoute");
 const agencyRoute = require("./routes/agencyRoute");
 const adminRoute = require("./routes/adminRoute");
 
@@ -31,6 +32,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.use("/auth", authRoute);
+app.use("/user", userRoute);
 app.use("/agent", agencyRoute);
 app.use("/admin", adminRoute);
 
