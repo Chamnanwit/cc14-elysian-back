@@ -13,3 +13,5 @@ exports.updateProfileAgency = (updateProfile) =>
   agencyRepository.updateProfileAgency(updateProfile);
 
 exports.getAllAgency = () => agencyRepository.getAllAgency();
+
+exports.getAllFromAgency = () => agencyRepository.getAllFromAgency();

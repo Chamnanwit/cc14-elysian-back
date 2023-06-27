@@ -8,7 +8,26 @@ const {
 
 exports.createProperty = (property) => Property.create(property);
 
-exports.getAllProperty = () => Property.findAll();
+exports.getAllProperty = () => {
+  return Property.findAll({
+    include: [
+      {
+        model: SubDistrict,
+        include: [
+          {
+            model: District,
+            include: {
+              model: Province,
+            },
+          },
+        ],
+      },
+      {
+        model: User,
+      },
+    ],
+  });
+};
 
 exports.getPropertyById = (id) => {
   return Property.findOne({
@@ -51,6 +70,13 @@ exports.updateProfileAgency = (updateProfile) => {
 };
 
 exports.getAllAgency = () =>
+  User.findAll({
+    where: {
+      role: "AGENCY",
+    },
+  });
+
+exports.getAllFromAgency = () =>
   User.findAll({
     where: {
       role: "AGENCY",

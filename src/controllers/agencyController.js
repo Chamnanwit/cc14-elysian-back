@@ -74,3 +74,13 @@ exports.getAllAgency = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getAllFromAgency = async (req, res, next) => {
+  try {
+    const result = await agencyService.getAllFromAgency();
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
