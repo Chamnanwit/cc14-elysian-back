@@ -49,3 +49,10 @@ exports.updateProfileAgency = (updateProfile) => {
     },
   });
 };
+
+exports.getAllAgency = () =>
+  User.findAll({
+    where: {
+      role: "AGENCY",
+    },
+  });
