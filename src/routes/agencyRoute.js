@@ -17,6 +17,7 @@ router.post(
 );
 router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
+router.get("/all-agency", agencyController.getAllAgency);
 router.delete("/properties/:id", agencyController.deleteProperty);
 router.patch("/update-profileagency", agencyController.updateProfileAgency);
 

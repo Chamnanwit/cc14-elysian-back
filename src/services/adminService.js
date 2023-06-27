@@ -42,3 +42,5 @@ exports.updateAdminForm = (updateForm) =>
   adminRepository.updateAdminForm(updateForm);
 
 exports.deleteAdminForm = (id) => adminRepository.deleteAdminForm(id);
+
+exports.getAllAdmin = () => adminRepository.getAllAdmin();

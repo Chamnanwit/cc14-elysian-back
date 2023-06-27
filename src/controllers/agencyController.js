@@ -97,3 +97,23 @@ exports.updateProfileAgency = async (req, res, next) => {
     next;
   }
 };
+
+exports.getAllAgency = async (req, res, next) => {
+  try {
+    const result = await agencyService.getAllAgency();
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getAllFromAgency = async (req, res, next) => {
+  try {
+    const result = await agencyService.getAllFromAgency();
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
