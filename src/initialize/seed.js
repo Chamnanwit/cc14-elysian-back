@@ -1,24 +1,4 @@
-const { User, RoomType, PricingPlan } = require("../models");
-// const bcrypt = require("bcryptjs");
-
-// const userSeed = async () => {
-//   const hashedPassword = await bcrypt.hash("1234", 12);
-
-//   const userData = [
-//     { email: "andy@ggmail.com", phone: "1111111", password: hashedPassword },
-//     { email: "bobby@ggmail.com", phone: "2222222", password: hashedPassword },
-//     { email: "cathy@ggmail.com", phone: "3333333", password: hashedPassword },
-//     { email: "danny@ggmail.com", phone: "4444444", password: hashedPassword },
-//     { email: "eddy@ggmail.com", phone: "5555555", password: hashedPassword },
-//     { email: "franky@ggmail.com", phone: "6666666", password: hashedPassword },
-//     { email: "goofy@ggmail.com", phone: "7777777", password: hashedPassword },
-//     { email: "honey@ggmail.com", phone: "8888888", password: hashedPassword },
-//   ];
-//   let res = await User.bulkCreate(userData);
-//   console.log(res);
-//   process.exit(0);
-// };
-// userSeed();
+const { RoomType, PricingPlan, OptionalType } = require("../models");
 
 const roomTypeSeed = async () => {
   const roomTypeData = [
@@ -43,10 +23,10 @@ const pricingPlanSeed = async () => {
       price: 0,
       expiration: "WEEKLY",
       topStatus: "DISABLE",
-      locked: "YES",
       limit: 5,
+      locked: 1,
       numberOfTop: 0,
-      status: "ENABLE",
+      status: "ACTIVE",
     },
     {
       id: 2,
@@ -55,10 +35,10 @@ const pricingPlanSeed = async () => {
       price: 49.99,
       expiration: "MONTHLY",
       topStatus: "ENABLE",
-      locked: "YES",
       limit: 20,
+      locked: 1,
       numberOfTop: 5,
-      status: "ENABLE",
+      status: "ACTIVE",
     },
     {
       id: 3,
@@ -67,10 +47,10 @@ const pricingPlanSeed = async () => {
       price: 99.99,
       expiration: "WEEKLY",
       topStatus: "DISABLE",
-      locked: "YES",
       limit: 50,
+      locked: 0,
       numberOfTop: 10,
-      status: "DISABLE",
+      status: "ACTIVE",
     },
   ];
   let res = await PricingPlan.bulkCreate(pricingPlanData);
@@ -78,3 +58,22 @@ const pricingPlanSeed = async () => {
 };
 
 pricingPlanSeed();
+
+const optionalTypeSeed = async () => {
+  const optionalTypeData = [
+    { id: 1, name: "เครื่องปรับอากาศ", type: "ROOM" },
+    { id: 2, name: "TV", type: "ROOM" },
+    { id: 3, name: "ตู้เย็น", type: "ROOM" },
+    { id: 4, name: "เครื่องทำน้ำอุ่น", type: "ROOM" },
+    { id: 5, name: "เครื่องซักผ้า", type: "ROOM" },
+    { id: 6, name: "สระว่ายน้ำ", type: "COMMON" },
+    { id: 7, name: "ฟิตเนส", type: "COMMON" },
+    { id: 8, name: "สวน", type: "COMMON" },
+    { id: 9, name: "ครัว", type: "COMMON" },
+    { id: 10, name: "Co-working Space", type: "COMMON" },
+  ];
+  let res = await OptionalType.bulkCreate(optionalTypeData);
+  process.exit(0);
+};
+
+optionalTypeSeed();

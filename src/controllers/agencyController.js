@@ -3,52 +3,13 @@ const agencyService = require("../services/agencyService");
 const cloudinary = require("../config/cloudinary");
 const fs = require("fs");
 
+const agencyService = require("../services/agencyService");
+
 exports.createProperty = async (req, res, next) => {
   try {
-    // console.log(req.body);
-    const {
-      name,
-      price,
-      floor,
-      totalArea,
-      totalUnit,
-      totalBedroom,
-      totalBathroom,
-      totalKitchen,
-      description,
-      latitude,
-      longitude,
-      rentPeriod,
-      locked,
-      published,
-      topStatus,
-      userId,
-      roomTypeId,
-      subDistrictId,
-    } = req.body;
+    const value = req.body;
 
-    // console.log(req.body);
-
-    const property = await Property.create({
-      name: name,
-      price: price,
-      floor: floor,
-      totalArea: totalArea,
-      totalUnit: totalUnit,
-      totalBedroom: totalBedroom,
-      totalBathroom: totalBathroom,
-      totalKitchen: totalKitchen,
-      description: description,
-      latitude: latitude,
-      longitude: longitude,
-      rentPeriod: rentPeriod,
-      locked: locked,
-      published: published,
-      topStatus: topStatus,
-      userId: userId,
-      roomTypeId: roomTypeId,
-      subDistrictId: subDistrictId,
-    });
+    const property = await agencyService.createProperty(value);
 
     res.status(201).json(property);
   } catch (err) {
@@ -56,96 +17,27 @@ exports.createProperty = async (req, res, next) => {
   }
 };
 
-exports.getAllPropertyList = async (req, res, next) => {
+exports.getAllProperty = async (req, res, next) => {
   try {
-    // const { id } = req.params;
-    // console.log(req);
-    const PropertyList = await Property.findAll({
-      attributes: [
-        "id",
-        "name",
-        "price",
-        "floor",
-        "totalArea",
-        "totalUnit",
-        "totalBedroom",
-        "totalBathroom",
-        "totalKitchen",
-        "description",
-        "latitude",
-        "longitude",
-        "rentPeriod",
-        "locked",
-        "published",
-        "userId",
-        "roomTypeId",
-        "subDistrictId",
-      ],
-      // where: { id: id },
-    });
+    const result = await agencyService.getAllProperty();
 
-    res.status(200).json(PropertyList);
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }
 };
 
-exports.getPropertyList = async (req, res, next) => {
+exports.getPropertyById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    // console.log(req);
-    const PropertyList = await Property.findOne({
-      attributes: [
-        "name",
-        "price",
-        "floor",
-        "totalArea",
-        "totalUnit",
-        "totalBedroom",
-        "totalBathroom",
-        "totalKitchen",
-        "description",
-        "latitude",
-        "longitude",
-        "rentPeriod",
-        "locked",
-        "published",
-        "userId",
-        "roomTypeId",
-        "subDistrictId",
-      ],
-      where: { id: id },
-    });
 
-    res.status(200).json(PropertyList);
+    const result = await agencyService.getPropertyById(id);
+
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }
 };
-
-// exports.updateContent = (req, res, next) => {
-//   const { id } = req.params;
-//   const {
-//     title,
-//     supTitle,
-//     image,
-//     ingredients,
-//     directions,
-//     cardId,
-//     userId,
-//     typefoodId,
-//   } = req.body;
-//   Content.update(
-//     { ...req.body, userId: req.user.id },
-//     {
-//       where: { id: id },
-//     }
-//   )
-//     .then((rs) => {
-//       res.status(200).json(rs);
-//     })
-//     .catch(next);
-// };
 
 exports.uploadProperty = async (req, res, next) => {
   try {
@@ -176,5 +68,34 @@ exports.uploadProperty = async (req, res, next) => {
         fs.unlinkSync(file.path);
       }
     }
+  }
+}
+
+exports.deleteProperty = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await agencyService.deleteProperty(id);
+
+    if (result === 0) {
+      throw new Error("Cannot Delete!!");
+    }
+
+    res.status(200).json({ message: "delete success" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.updateProfileAgency = async (req, res, next) => {
+  try {
+    const updateProfile = req.body;
+    // const id = req.params.id;
+
+    const result = await agencyService.updateProfileAgency(updateProfile);
+
+    res.status(200).json({ message: "update success" });
+  } catch (err) {
+    next;
   }
 };

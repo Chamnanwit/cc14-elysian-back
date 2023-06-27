@@ -20,18 +20,22 @@ module.exports = (sequelize, DataTypes) => {
       expiration: {
         type: DataTypes.ENUM("WEEKLY", "MONTHLY"),
       },
-      topStatus: {
-        type: DataTypes.ENUM("DISABLE", "ENABLE"),
-      },
       locked: {
-        type: DataTypes.ENUM("YES", "NO"),
+        type: DataTypes.BOOLEAN("TRUE", "FALSE"),
+        allowNull: false,
       },
       numberOfTop: {
         type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      status: {
+        type: DataTypes.ENUM("ACTIVE", "INACTIVE"),
         allowNull: false,
+        defaultValue: "ACTIVE",
       },
     },
     {
+      paranoid: true,
       timestamps: true,
       underscored: true,
     }

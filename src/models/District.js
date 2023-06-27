@@ -5,17 +5,14 @@ module.exports = (sequelize, DataTypes) => {
       code: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true,
       },
       nameInThai: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       nameInEnglish: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
     },
     {
