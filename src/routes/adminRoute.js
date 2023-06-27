@@ -24,4 +24,7 @@ router.patch("/update-optional", adminController.updateOptional);
 
 router.patch("/update-profileadmin", adminController.updateProfileAdmin);
 
+router.patch("/admin-edit-form", adminController.updateAdminForm);
+router.delete("/admin-delete-form/:id", adminController.deleteAdminForm);
+
 module.exports = router;
