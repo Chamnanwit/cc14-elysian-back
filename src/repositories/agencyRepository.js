@@ -82,3 +82,11 @@ exports.getAllFromAgency = () =>
       role: "AGENCY",
     },
   });
+
+exports.deleteProfileAgency = (id) => {
+  return User.destroy({
+    where: {
+      id: id,
+    },
+  });
+};
