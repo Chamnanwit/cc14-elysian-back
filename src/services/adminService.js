@@ -21,8 +21,8 @@ exports.getOptionalTypeById = (id) => adminRepository.getOptionalTypeById(id);
 
 exports.deleteOptionalType = (id) => adminRepository.deleteOptionalType(id);
 
-exports.updateOptionalType = (updateOptionalType, id) =>
-  adminRepository.updateOptionalType(updateOptionalType, id);
+exports.updateOptionalType = (updateOptionalType) =>
+  adminRepository.updateOptionalType(updateOptionalType);
 
 exports.createOptional = (optional) => adminRepository.createOptional(optional);
 
@@ -37,3 +37,8 @@ exports.updateOptional = (updateOptional, id) =>
 
 exports.updateProfileAdmin = (updateProfile) =>
   adminRepository.updateProfileAdmin(updateProfile);
+
+exports.updateAdminForm = (updateForm) =>
+  adminRepository.updateAdminForm(updateForm);
+
+exports.deleteAdminForm = (id) => adminRepository.deleteAdminForm(id);

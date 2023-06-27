@@ -55,7 +55,6 @@ exports.deletePricingPlan = async (req, res, next) => {
 exports.updatePricingPlan = async (req, res, next) => {
   try {
     const updatePackage = req.body;
-    // const id = req.params.id;
 
     const result = await adminService.updatePricingPlan(updatePackage);
 
@@ -118,12 +117,8 @@ exports.deleteOptionalType = async (req, res, next) => {
 exports.updateOptionalType = async (req, res, next) => {
   try {
     const updateOptionalType = req.body;
-    const id = req.params.id;
 
-    const result = await adminService.updateOptionalType(
-      updateOptionalType,
-      id
-    );
+    const result = await adminService.updateOptionalType(updateOptionalType);
 
     res.status(200).json({ message: "update success" });
   } catch (err) {
@@ -184,9 +179,8 @@ exports.deleteOptional = async (req, res, next) => {
 exports.updateOptional = async (req, res, next) => {
   try {
     const updateOptional = req.body;
-    const id = req.params.id;
 
-    const result = await adminService.updateOptional(updateOptional, id);
+    const result = await adminService.updateOptional(updateOptional);
 
     res.status(200).json({ message: "update success" });
   } catch (err) {
@@ -203,5 +197,33 @@ exports.updateProfileAdmin = async (req, res, next) => {
     res.status(200).json({ message: "update success" });
   } catch (err) {
     next;
+  }
+};
+
+exports.updateAdminForm = async (req, res, next) => {
+  try {
+    const updateForm = req.body;
+
+    const result = await adminService.updateAdminForm(updateForm);
+
+    res.status(200).json({ message: "update success" });
+  } catch (err) {
+    next;
+  }
+};
+
+exports.deleteAdminForm = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await adminService.deleteAdminForm(id);
+
+    if (result === 0) {
+      throw new Error("Cannot Delete!!");
+    }
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
   }
 };

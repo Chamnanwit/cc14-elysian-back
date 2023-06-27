@@ -1,15 +1,20 @@
 const express = require("express");
 const agencyController = require("../controllers/agencyController");
 const upload = require("../middlewares/upload");
+const authenticateMiddleware = require("../middlewares/authenticate");
 
 const router = express.Router();
 
 router.post(
-    "/addImage/:propertyId",
-    upload.array("imageLink"),
-    agencyController.uploadProperty
-    );
-router.post("/properties", agencyController.createProperty);
+  "/addImage/:propertyId",
+  upload.array("imageLink"),
+  agencyController.uploadProperty
+);
+router.post(
+  "/properties",
+  authenticateMiddleware,
+  agencyController.createProperty
+);
 router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
 router.delete("/properties/:id", agencyController.deleteProperty);

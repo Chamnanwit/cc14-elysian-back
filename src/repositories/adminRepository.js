@@ -51,10 +51,10 @@ exports.deleteOptionalType = (id) => {
   });
 };
 
-exports.updateOptionalType = (updateOptionalType, id) => {
+exports.updateOptionalType = (updateOptionalType) => {
   return OptionalType.update(updateOptionalType, {
     where: {
-      id: id,
+      id: updateOptionalType.id,
     },
   });
 };
@@ -79,10 +79,10 @@ exports.deleteOptional = (id) => {
   });
 };
 
-exports.updateOptional = (updateOptional, id) => {
+exports.updateOptional = (updateOptional) => {
   return Optional.update(updateOptional, {
     where: {
-      id: id,
+      id: updateOptional.id,
     },
   });
 };
@@ -91,6 +91,22 @@ exports.updateProfileAdmin = (updateProfile) => {
   return User.update(updateProfile, {
     where: {
       id: updateProfile.id,
+    },
+  });
+};
+
+exports.updateAdminForm = (updateForm) => {
+  return User.update(updateForm, {
+    where: {
+      id: updateForm.id,
+    },
+  });
+};
+
+exports.deleteAdminForm = (id) => {
+  return User.destroy({
+    where: {
+      id: id,
     },
   });
 };
