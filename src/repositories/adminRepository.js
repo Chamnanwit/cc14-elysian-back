@@ -94,3 +94,19 @@ exports.updateProfileAdmin = (updateProfile) => {
     },
   });
 };
+
+exports.updateAdminForm = (updateForm) => {
+  return User.update(updateForm, {
+    where: {
+      id: updateForm.id,
+    },
+  });
+};
+
+exports.deleteAdminForm = (id) => {
+  return User.destroy({
+    where: {
+      id: id,
+    },
+  });
+};

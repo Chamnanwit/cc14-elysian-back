@@ -199,3 +199,31 @@ exports.updateProfileAdmin = async (req, res, next) => {
     next;
   }
 };
+
+exports.updateAdminForm = async (req, res, next) => {
+  try {
+    const updateForm = req.body;
+
+    const result = await adminService.updateAdminForm(updateForm);
+
+    res.status(200).json({ message: "update success" });
+  } catch (err) {
+    next;
+  }
+};
+
+exports.deleteAdminForm = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await adminService.deleteAdminForm(id);
+
+    if (result === 0) {
+      throw new Error("Cannot Delete!!");
+    }
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};

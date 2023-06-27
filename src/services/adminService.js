@@ -37,3 +37,8 @@ exports.updateOptional = (updateOptional, id) =>
 
 exports.updateProfileAdmin = (updateProfile) =>
   adminRepository.updateProfileAdmin(updateProfile);
+
+exports.updateAdminForm = (updateForm) =>
+  adminRepository.updateAdminForm(updateForm);
+
+exports.deleteAdminForm = (id) => adminRepository.deleteAdminForm(id);

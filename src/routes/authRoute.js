@@ -8,7 +8,9 @@ const router = express.Router();
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);
-router.get("/me", authenticateMiddleware, authController.getMe);
+router.get("/me", authController.getMe);
+router.post("/checkme", authController.checkMe);
+
 router.post("/otp", otpController.otp);
 router.post("/verify", otpController.verify);
 
