@@ -227,3 +227,13 @@ exports.deleteAdminForm = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getAllAdmin = async (req, res, next) => {
+  try {
+    const result = await adminService.getAllAdmin();
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};

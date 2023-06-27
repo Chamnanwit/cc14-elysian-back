@@ -110,3 +110,10 @@ exports.deleteAdminForm = (id) => {
     },
   });
 };
+
+exports.getAllAdmin = () =>
+  User.findAll({
+    where: {
+      role: "ADMIN",
+    },
+  });
