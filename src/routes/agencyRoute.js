@@ -23,6 +23,4 @@ router.delete(
 
 router.get("/agencybyid/:id", agencyController.getAgencyById);
 
-router.get("/get-report", agencyController.getReportAgency);
-
 module.exports = router;

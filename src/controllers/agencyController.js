@@ -1,4 +1,4 @@
-const { Property } = require("../models");
+const { Property, PurchaseHistory } = require("../models");
 
 const agencyService = require("../services/agencyService");
 
@@ -113,13 +113,59 @@ exports.deleteProfileAgency = async (req, res, next) => {
   }
 };
 
-exports.getReportAgency = async (req, res, next) => {
-  try {
-    const purchaseResult = await agencyService.getReportAgency();
-    console.log(purchaseResult);
+// exports.getReportAgency = async (req, res, next) => {
+//   try {
+//     const {
+//       dailyPurchaseResult,
+//       monthlyPurchaseResult,
+//       yearlyPurchaseResult,
+//       totalPurchase,
+//     } = await agencyService.getPurchase();
 
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
-};
+//     const {
+//       dailyNewUserResult,
+//       monthlyNewUserResult,
+//       yearlyNewUserResult,
+//       totalNewUser,
+//     } = await agencyService.getNewUser();
+
+//     const {
+//       activePropertyResult,
+//       inactivePropertyResult,
+//       totalPropertyResult,
+//     } = await agencyService.getProperty();
+
+//     const { agencyResult } = await agencyService.getAgencyResult();
+
+//     const {
+//       dailyEarningResult,
+//       monthlyEarningResult,
+//       yearlyEarningResult,
+//       totalEarning,
+//     } = await agencyService.getEarning();
+
+//     //  const report = Object.assign({},)
+//     const report = {
+//       dailyPurchaseResult,
+//       monthlyPurchaseResult,
+//       yearlyPurchaseResult,
+//       totalPurchase,
+//       dailyNewUserResult,
+//       monthlyNewUserResult,
+//       yearlyNewUserResult,
+//       totalNewUser,
+//       activePropertyResult,
+//       inactivePropertyResult,
+//       totalPropertyResult,
+//       agencyResult,
+//       dailyEarningResult,
+//       monthlyEarningResult,
+//       yearlyEarningResult,
+//       totalEarning,
+//     };
+
+//     res.status(200).json(report);
+//   } catch (err) {
+//     next(err);
+//   }
+// };

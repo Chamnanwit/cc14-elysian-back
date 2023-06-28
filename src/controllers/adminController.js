@@ -237,3 +237,59 @@ exports.getAllAdmin = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getReport = async (req, res, next) => {
+  try {
+    const {
+      dailyPurchaseResult,
+      monthlyPurchaseResult,
+      yearlyPurchaseResult,
+      totalPurchase,
+    } = await adminService.getPurchase();
+
+    const {
+      dailyNewUserResult,
+      monthlyNewUserResult,
+      yearlyNewUserResult,
+      totalNewUser,
+    } = await adminService.getNewUser();
+
+    const {
+      activePropertyResult,
+      inactivePropertyResult,
+      totalPropertyResult,
+    } = await adminService.getProperty();
+
+    const { agencyResult } = await adminService.getAgencyResult();
+
+    const {
+      dailyEarningResult,
+      monthlyEarningResult,
+      yearlyEarningResult,
+      totalEarning,
+    } = await adminService.getEarning();
+
+    const report = {
+      dailyPurchaseResult,
+      monthlyPurchaseResult,
+      yearlyPurchaseResult,
+      totalPurchase,
+      dailyNewUserResult,
+      monthlyNewUserResult,
+      yearlyNewUserResult,
+      totalNewUser,
+      activePropertyResult,
+      inactivePropertyResult,
+      totalPropertyResult,
+      agencyResult,
+      dailyEarningResult,
+      monthlyEarningResult,
+      yearlyEarningResult,
+      totalEarning,
+    };
+
+    res.status(200).json(report);
+  } catch (err) {
+    next(err);
+  }
+};
