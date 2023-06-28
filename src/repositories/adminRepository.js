@@ -116,4 +116,5 @@ exports.getAllAdmin = () =>
     where: {
       role: "ADMIN",
     },
+    order: [["locked", "DESC"]],
   });
