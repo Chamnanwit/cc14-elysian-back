@@ -75,6 +75,18 @@ exports.getAllAgency = async (req, res, next) => {
   }
 };
 
+exports.getAgencyById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await agencyService.getAgencyById(id);
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.getAllFromAgency = async (req, res, next) => {
   try {
     const result = await agencyService.getAllFromAgency();
@@ -96,6 +108,17 @@ exports.deleteProfileAgency = async (req, res, next) => {
     }
 
     res.status(200).json({ message: "delete success" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getReportAgency = async (req, res, next) => {
+  try {
+    const purchaseResult = await agencyService.getReportAgency();
+    console.log(purchaseResult);
+
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }

@@ -6,6 +6,7 @@ const {
   Province,
   Optional,
   OptionalType,
+  PurchaseHistory,
 } = require("../models");
 
 exports.createProperty = (property) => Property.create(property);
@@ -90,10 +91,22 @@ exports.getAllFromAgency = () =>
     },
   });
 
+exports.getAgencyById = (id) => {
+  return User.findOne({
+    where: {
+      id: id,
+    },
+  });
+};
+
 exports.deleteProfileAgency = (id) => {
   return User.destroy({
     where: {
       id: id,
     },
   });
+};
+
+exports.getReportAgency = () => {
+  return PurchaseHistory.findAll({});
 };
