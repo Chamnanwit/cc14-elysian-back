@@ -4,6 +4,8 @@ const {
   SubDistrict,
   District,
   Province,
+  Optional,
+  OptionalType,
 } = require("../models");
 
 exports.createProperty = (property) => Property.create(property);
@@ -49,6 +51,10 @@ exports.getPropertyById = (id) => {
       {
         model: User,
       },
+      {
+        model: Optional,
+        include: OptionalType,
+      },
     ],
   });
 };
@@ -74,6 +80,7 @@ exports.getAllAgency = () =>
     where: {
       role: "AGENCY",
     },
+    order: [["locked", "DESC"]],
   });
 
 exports.getAllFromAgency = () =>
