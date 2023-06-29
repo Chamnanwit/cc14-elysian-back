@@ -5,6 +5,8 @@ exports.getUserByEmail = (email) => {
     where: {
       email: email,
     },
+    paranoid: false,
+    // ถ้าไม่ตั้งค่า paranoid: false การใช้findOne ก็จะไม่เจอ user ในระบบ
   });
 };
 

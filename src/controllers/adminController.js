@@ -179,6 +179,7 @@ exports.deleteOptional = async (req, res, next) => {
 exports.updateOptional = async (req, res, next) => {
   try {
     const updateOptional = req.body;
+    console.log(req.body);
 
     const result = await adminService.updateOptional(updateOptional);
 
@@ -233,6 +234,62 @@ exports.getAllAdmin = async (req, res, next) => {
     const result = await adminService.getAllAdmin();
 
     res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getReport = async (req, res, next) => {
+  try {
+    const {
+      dailyPurchaseResult,
+      monthlyPurchaseResult,
+      yearlyPurchaseResult,
+      totalPurchase,
+    } = await adminService.getPurchase();
+
+    const {
+      dailyNewUserResult,
+      monthlyNewUserResult,
+      yearlyNewUserResult,
+      totalNewUser,
+    } = await adminService.getNewUser();
+
+    const {
+      activePropertyResult,
+      inactivePropertyResult,
+      totalPropertyResult,
+    } = await adminService.getProperty();
+
+    const { agencyResult } = await adminService.getAgencyResult();
+
+    const {
+      dailyEarningResult,
+      monthlyEarningResult,
+      yearlyEarningResult,
+      totalEarning,
+    } = await adminService.getEarning();
+
+    const report = {
+      dailyPurchaseResult,
+      monthlyPurchaseResult,
+      yearlyPurchaseResult,
+      totalPurchase,
+      dailyNewUserResult,
+      monthlyNewUserResult,
+      yearlyNewUserResult,
+      totalNewUser,
+      activePropertyResult,
+      inactivePropertyResult,
+      totalPropertyResult,
+      agencyResult,
+      dailyEarningResult,
+      monthlyEarningResult,
+      yearlyEarningResult,
+      totalEarning,
+    };
+
+    res.status(200).json(report);
   } catch (err) {
     next(err);
   }

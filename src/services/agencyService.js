@@ -14,6 +14,18 @@ exports.updateProfileAgency = (updateProfile) =>
 
 exports.getAllAgency = () => agencyRepository.getAllAgency();
 
+exports.getAgencyById = (id) => agencyRepository.getAgencyById(id);
+
 exports.getAllFromAgency = () => agencyRepository.getAllFromAgency();
 
 exports.deleteProfileAgency = (id) => agencyRepository.deleteProfileAgency(id);
+
+// exports.getPurchase = () => agencyRepository.getPurchase();
+
+// exports.getNewUser = () => agencyRepository.getNewUser();
+
+// exports.getProperty = () => agencyRepository.getProperty();
+
+// exports.getAgencyResult = () => agencyRepository.getAgencyResult();
+
+// exports.getEarning = () => agencyRepository.getEarning();

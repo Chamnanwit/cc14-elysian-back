@@ -29,4 +29,6 @@ router.delete("/admin-delete-form/:id", adminController.deleteAdminForm);
 
 router.get("/all-admin", adminController.getAllAdmin);
 
+router.get("/get-report", adminController.getReport);
+
 module.exports = router;

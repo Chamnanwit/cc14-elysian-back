@@ -25,4 +25,6 @@ router.delete(
   agencyController.deleteProfileAgency
 );
 
+router.get("/agencybyid/:id", agencyController.getAgencyById);
+
 module.exports = router;
