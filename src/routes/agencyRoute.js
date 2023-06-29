@@ -23,4 +23,6 @@ router.delete(
 
 router.get("/agencybyid/:id", agencyController.getAgencyById);
 
+router.get("/propertybyagencyid/:id", agencyController.getPropertyByAgencyId);
+
 module.exports = router;

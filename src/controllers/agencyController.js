@@ -113,59 +113,14 @@ exports.deleteProfileAgency = async (req, res, next) => {
   }
 };
 
-// exports.getReportAgency = async (req, res, next) => {
-//   try {
-//     const {
-//       dailyPurchaseResult,
-//       monthlyPurchaseResult,
-//       yearlyPurchaseResult,
-//       totalPurchase,
-//     } = await agencyService.getPurchase();
+exports.getPropertyByAgencyId = async (req, res, next) => {
+  try {
+    const { id } = req.params;
 
-//     const {
-//       dailyNewUserResult,
-//       monthlyNewUserResult,
-//       yearlyNewUserResult,
-//       totalNewUser,
-//     } = await agencyService.getNewUser();
+    const result = await agencyService.getPropertyByAgencyId(id);
 
-//     const {
-//       activePropertyResult,
-//       inactivePropertyResult,
-//       totalPropertyResult,
-//     } = await agencyService.getProperty();
-
-//     const { agencyResult } = await agencyService.getAgencyResult();
-
-//     const {
-//       dailyEarningResult,
-//       monthlyEarningResult,
-//       yearlyEarningResult,
-//       totalEarning,
-//     } = await agencyService.getEarning();
-
-//     //  const report = Object.assign({},)
-//     const report = {
-//       dailyPurchaseResult,
-//       monthlyPurchaseResult,
-//       yearlyPurchaseResult,
-//       totalPurchase,
-//       dailyNewUserResult,
-//       monthlyNewUserResult,
-//       yearlyNewUserResult,
-//       totalNewUser,
-//       activePropertyResult,
-//       inactivePropertyResult,
-//       totalPropertyResult,
-//       agencyResult,
-//       dailyEarningResult,
-//       monthlyEarningResult,
-//       yearlyEarningResult,
-//       totalEarning,
-//     };
-
-//     res.status(200).json(report);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
