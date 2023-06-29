@@ -128,7 +128,7 @@ exports.getAllAdmin = () =>
     where: {
       role: "ADMIN",
     },
-    order: [["locked", "DESC"]],
+    order: [["locked"]],
   });
 
 exports.getNewUser = async () => {
@@ -295,9 +295,7 @@ exports.getEarning = async () => {
       createdAt: { [Op.between]: [startTime, endTime] },
       paymentStatus: "SUCCESS",
     },
-    attributes: [
-      [fn("SUM", col("PricingPlan.price")), "totaldailyEarningValue"],
-    ],
+    attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
     include: {
       model: PricingPlan,
       attributes: [],
@@ -309,9 +307,7 @@ exports.getEarning = async () => {
       createdAt: { [Op.between]: [startTimeMonth, endTimeMonth] },
       paymentStatus: "SUCCESS",
     },
-    attributes: [
-      [fn("SUM", col("PricingPlan.price")), "totalmonthlyEarningValue"],
-    ],
+    attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
     include: {
       model: PricingPlan,
       attributes: [],
@@ -323,9 +319,7 @@ exports.getEarning = async () => {
       createdAt: { [Op.between]: [startTimeYear, endTimeYear] },
       paymentStatus: "SUCCESS",
     },
-    attributes: [
-      [fn("SUM", col("PricingPlan.price")), "totalyearlyEarningValue"],
-    ],
+    attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
     include: {
       model: PricingPlan,
       attributes: [],
@@ -336,7 +330,7 @@ exports.getEarning = async () => {
     where: {
       paymentStatus: "SUCCESS",
     },
-    attributes: [[fn("SUM", col("PricingPlan.price")), "totalEarningValue"]],
+    attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
     include: {
       model: PricingPlan,
       attributes: [],
