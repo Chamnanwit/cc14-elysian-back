@@ -179,6 +179,7 @@ exports.deleteOptional = async (req, res, next) => {
 exports.updateOptional = async (req, res, next) => {
   try {
     const updateOptional = req.body;
+    console.log(req.body);
 
     const result = await adminService.updateOptional(updateOptional);
 
