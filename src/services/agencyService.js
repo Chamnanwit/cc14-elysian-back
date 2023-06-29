@@ -20,12 +20,5 @@ exports.getAllFromAgency = () => agencyRepository.getAllFromAgency();
 
 exports.deleteProfileAgency = (id) => agencyRepository.deleteProfileAgency(id);
 
-// exports.getPurchase = () => agencyRepository.getPurchase();
-
-// exports.getNewUser = () => agencyRepository.getNewUser();
-
-// exports.getProperty = () => agencyRepository.getProperty();
-
-// exports.getAgencyResult = () => agencyRepository.getAgencyResult();
-
-// exports.getEarning = () => agencyRepository.getEarning();
+exports.getPropertyByAgencyId = (id) =>
+  agencyRepository.getPropertyByAgencyId(id);
