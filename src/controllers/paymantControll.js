@@ -10,14 +10,47 @@ const stripe = require("stripe")(stripeSecretKey);
 
 exports.package = async (req, res, next) => {
   try {
-    await stripe.checkout.sessions.create({
-      success_url: "http://localhost:5173/", // หน้าชำระสำเร็จ
-      cancelUrl: "http://localhost:5173/", // กลับไปหน้าไหนเมื่อยกเลิกการจ่ายเงิน
+    console.log("--------------------", req.body);
+    const data = await stripe.checkout.sessions.create({
+      success_url:
+        "http://localhost:5173/successpay?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "http://localhost:5173/",
       locale: "th",
       currency: "THB",
       // customer: ,
-      line_items: [{ price: "price_H5ggYwtDq4fbrJ", quantity: 1 }],
+      line_items: [{ price: req.body.id, quantity: 1 }],
       mode: "payment",
+    });
+    console.log(data);
+    res.json(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.packageData = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const data = req.query;
+    const response = {};
+    //   console.log("payment :", data);
+    const session = await stripe.checkout.sessions.retrieve(
+      req.query.session_id
+    );
+      console.log("________1", session);
+    if (session) {
+      response.session = session;
+    }
+
+    //   await Payment.create({
+    //     id: session.id,
+    //     userId: user.id,
+    //   });
+    //   console.log("_______aa", req.query);
+
+    return res.json({
+      message: "success",
+      ...response,
     });
   } catch (err) {
     next(err);
