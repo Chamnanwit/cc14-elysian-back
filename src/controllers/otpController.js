@@ -39,7 +39,7 @@ exports.otp = async (req, res, next) => {
 // <=== function verify OTP ===>
 
 exports.verify = async (req, res, next) => {
-  const { code, phoneNumber } = req.body;
+  const { phoneNumber, code } = req.body;
 
   // console.log(code, phoneNumber);
 
@@ -77,35 +77,36 @@ exports.verify = async (req, res, next) => {
 
             // const token = genToken({ id: user.id });
             const output = {
-              message: "User is Verified!!",
+              message: "ยืนยันตัวตนสำเร็จ",
               twUpdateStatus: data.status,
               userStatus: userStatus[0], // ถอดอาเร เพื่อเป็น obj โดยกำหนดเอาค่าตำแหน่ง index มาเลย
             };
 
             res.status(201).json(output);
           }
-          if (!user) {
-            res.status(201).json({
-              message: "User is Verifired!! but not regis yet",
-              statusOtp: data.status,
-            });
-          }
+          // if (!user) {
+          //   res.status(201).json({
+          //     message: "ยืนยันตัวตนสำเร็จ แต่ยังไม่ได้ลงทะเบียน",
+          //     statusOtp: data.status,
+          //   });
+          // }
         } catch (err) {
           next(err);
         }
 
         //  #############################################
       } else {
-        console.log("User Verifired Error");
-        res.status(400).json({ message: "User Varifired Error" });
+        console.log("ยืนยันตัวตนไม่สำเร็จ !!!");
+        res.status(400).json({ message: "ยืนยันตัวตนไม่สำเร็จ !!!" });
       }
     } catch (err) {
       console.log("User Varifired Error");
-      res.status(404).send("User Varifired Error");
+      res.status(404).send("ระบบยืนยันตัวตนมีปัญหา!!!");
     }
-  } else {
-    res.status(400).json({
-      message: "Wrong phone number or code :(",
-    });
+    // } else {
+    //   res.status(400).json({
+    //     message: "Wrong phone number or code :(",
+    //   });
+    // }
   }
 };
