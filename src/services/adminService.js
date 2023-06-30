@@ -54,3 +54,5 @@ exports.getProperty = () => adminRepository.getProperty();
 exports.getAgencyResult = () => adminRepository.getAgencyResult();
 
 exports.getEarning = () => adminRepository.getEarning();
+
+exports.getAllPurchaseHistory = () => adminRepository.getAllPurchaseHistory();

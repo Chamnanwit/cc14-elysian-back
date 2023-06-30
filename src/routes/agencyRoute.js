@@ -33,4 +33,6 @@ router.get("/agencybyid/:id", agencyController.getAgencyById);
 
 router.get("/propertybyagencyid/:id", agencyController.getPropertyByAgencyId);
 
+router.get("/purchase-history/:id", agencyController.getPurchaseHistoryById);
+
 module.exports = router;

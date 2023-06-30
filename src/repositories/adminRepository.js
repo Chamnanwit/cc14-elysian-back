@@ -344,3 +344,15 @@ exports.getEarning = async () => {
     totalEarning,
   };
 };
+
+exports.getAllPurchaseHistory = () =>
+  PurchaseHistory.findAll({
+    include: [
+      {
+        model: PricingPlan,
+      },
+      {
+        model: User,
+      },
+    ],
+  });
