@@ -11,6 +11,12 @@ router.post(
   authenticateMiddleware,
   agencyController.createProperty
 );
+
+router.post(
+  "/propertiesandoptionals",
+  agencyController.createPropertyAndOptional
+);
+
 router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
 router.get("/all-agency", agencyController.getAllAgency);
