@@ -1,11 +1,16 @@
 const express = require("express");
-
 const agencyController = require("../controllers/agencyController");
+const upload = require("../middlewares/upload");
 const paymentController = require("../controllers/paymantControll");
 const authenticateMiddleware = require("../middlewares/authenticate");
 
 const router = express.Router();
 
+router.post(
+  "/addImage/:propertyId",
+  upload.array("imageLink"),
+  agencyController.uploadProperty
+);
 router.post(
   "/properties",
   authenticateMiddleware,
@@ -22,12 +27,8 @@ router.get("/properties/:id", agencyController.getPropertyById);
 router.get("/all-agency", agencyController.getAllAgency);
 router.delete("/properties/:id", agencyController.deleteProperty);
 
-router.post("/payment", paymentController.package);
-router.get(
-  "/payment/data",
-  authenticateMiddleware,
-  paymentController.packageData
-);
+router.post("/payment",authenticateMiddleware, paymentController.package);
+router.get('/payment/data',authenticateMiddleware ,paymentController.packageData);
 
 router.patch("/update-profileagency", agencyController.updateProfileAgency);
 router.delete(

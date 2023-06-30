@@ -1,6 +1,8 @@
 const { Property, PurchaseHistory, Optional, sequelize } = require("../models");
 
 const agencyService = require("../services/agencyService");
+const cloudinary = require("../config/cloudinary");
+const fs = require("fs");
 
 exports.createProperty = async (req, res, next) => {
   try {
@@ -84,6 +86,42 @@ exports.getPropertyById = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.uploadProperty = async (req, res, next) => {
+  try {
+    const multiupload = async (files) => {
+      console.log(files);
+      const uploadMultiFiles = [];
+      for (let file of files) {
+        const result = await cloudinary.uploader.upload(file.path);
+        uploadMultiFiles.push(result.secure_url);
+      }
+      return uploadMultiFiles;
+    };
+    const {  propertyId } = req.params;
+    console.log(req.files);
+    // console.log("---------------- -p-------------------------",propertyId)
+    await multiupload(req.files).then(async (uploadMultiFiles) => {
+      // console.log(uploadMultiFiles.length)
+      const imgArr = uploadMultiFiles.map((el) => {
+        const obj = { propertyId: propertyId, imageLink: el };
+        // console.log("-------------*-*-*-*-*----------------------", imgArr[0])
+        return obj;
+      });
+      // console.log("-------------*-*-*-*-*----------------------", imgArr)
+      const rs = await agencyService.uploadMultiFiles(imgArr);
+      res.json(rs);
+    });
+  } catch (err) {
+    next(err);
+  } finally {
+    if(req.files) {
+      for (let file of req.files) {
+        fs.unlinkSync(file.path);
+      }
+    }
+  }
+}
 
 exports.deleteProperty = async (req, res, next) => {
   try {

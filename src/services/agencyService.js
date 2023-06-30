@@ -1,5 +1,9 @@
 const agencyRepository = require("../repositories/agencyRepository");
+const { Image } = require("../models");
 
+exports.createProperty = (property) => userRepository.create(property);
+
+exports.uploadMultiFiles = (files) => Image.bulkCreate(files);
 exports.createProperty = (property) =>
   agencyRepository.createProperty(property);
 
