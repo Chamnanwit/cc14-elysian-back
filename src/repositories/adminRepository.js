@@ -344,3 +344,5 @@ exports.getEarning = async () => {
     totalEarning,
   };
 };
+
+exports.getAllPurchaseHistory = () => PurchaseHistory.findAll();

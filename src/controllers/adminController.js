@@ -307,3 +307,13 @@ exports.getReport = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getAllPurchaseHistory = async (req, res, next) => {
+  try {
+    const result = await adminService.getAllPurchaseHistory();
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
