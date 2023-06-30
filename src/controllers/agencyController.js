@@ -51,11 +51,15 @@ exports.uploadProperty = async (req, res, next) => {
     };
     const {  propertyId } = req.params;
     console.log(req.files);
+    // console.log("---------------- -p-------------------------",propertyId)
     await multiupload(req.files).then(async (uploadMultiFiles) => {
+      // console.log(uploadMultiFiles.length)
       const imgArr = uploadMultiFiles.map((el) => {
         const obj = { propertyId: propertyId, imageLink: el };
+        // console.log("-------------*-*-*-*-*----------------------", imgArr[0])
         return obj;
       });
+      // console.log("-------------*-*-*-*-*----------------------", imgArr)
       const rs = await agencyService.uploadMultiFiles(imgArr);
       res.json(rs);
     });

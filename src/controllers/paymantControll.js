@@ -11,7 +11,7 @@ const { PurchaseHistory } = require("../models")
 
 exports.package = async (req, res, next) => {
   try {
-    console.log("--------------------", req.body);
+    // console.log("--------------------", req.body);
     const data = await stripe.checkout.sessions.create({
       success_url:
         "http://localhost:5173/successpay?session_id={CHECKOUT_SESSION_ID}",

@@ -1,4 +1,5 @@
 const agencyRepository = require("../repositories/agencyRepository");
+const { Image } = require("../models");
 
 exports.createProperty = (property) => userRepository.create(property);
 
