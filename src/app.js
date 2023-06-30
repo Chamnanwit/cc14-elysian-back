@@ -9,6 +9,7 @@ const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
 const agencyRoute = require("./routes/agencyRoute");
 const adminRoute = require("./routes/adminRoute");
+const searchRoute = require("./routes/searchRoute");
 
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorMiddleware = require("./middlewares/error");
@@ -35,6 +36,7 @@ app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/agent", agencyRoute);
 app.use("/admin", adminRoute);
+app.use("/search", searchRoute);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

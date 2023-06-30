@@ -179,6 +179,7 @@ exports.deleteOptional = async (req, res, next) => {
 exports.updateOptional = async (req, res, next) => {
   try {
     const updateOptional = req.body;
+    console.log(req.body);
 
     const result = await adminService.updateOptional(updateOptional);
 
@@ -233,6 +234,75 @@ exports.getAllAdmin = async (req, res, next) => {
     const result = await adminService.getAllAdmin();
 
     res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getReport = async (req, res, next) => {
+  try {
+    const {
+      dailyPurchaseResult,
+      monthlyPurchaseResult,
+      yearlyPurchaseResult,
+      totalPurchase,
+    } = await adminService.getPurchase();
+
+    const {
+      dailyNewUserResult,
+      monthlyNewUserResult,
+      yearlyNewUserResult,
+      totalNewUser,
+    } = await adminService.getNewUser();
+
+    const {
+      activePropertyResult,
+      inactivePropertyResult,
+      totalPropertyResult,
+    } = await adminService.getProperty();
+
+    const { agencyResult } = await adminService.getAgencyResult();
+
+    const {
+      dailyEarningResult,
+      monthlyEarningResult,
+      yearlyEarningResult,
+      totalEarning,
+    } = await adminService.getEarning();
+
+    const report = {
+      dailyPurchaseResult: JSON.parse(JSON.stringify(dailyPurchaseResult[0]))
+        .count,
+      monthlyPurchaseResult: JSON.parse(
+        JSON.stringify(monthlyPurchaseResult[0])
+      ).count,
+      yearlyPurchaseResult: JSON.parse(JSON.stringify(yearlyPurchaseResult[0]))
+        .count,
+      totalPurchase: JSON.parse(JSON.stringify(totalPurchase[0])).count,
+      dailyNewUserResult: JSON.parse(JSON.stringify(dailyNewUserResult[0]))
+        .count,
+      monthlyNewUserResult: JSON.parse(JSON.stringify(monthlyNewUserResult[0]))
+        .count,
+      yearlyNewUserResult: JSON.parse(JSON.stringify(yearlyNewUserResult[0]))
+        .count,
+      totalNewUser: JSON.parse(JSON.stringify(totalNewUser[0])).count,
+      activePropertyResult: JSON.parse(JSON.stringify(activePropertyResult[0]))
+        .count,
+      inactivePropertyResult: JSON.parse(
+        JSON.stringify(inactivePropertyResult[0])
+      ).count,
+      totalPropertyResult: JSON.parse(JSON.stringify(totalPropertyResult[0]))
+        .count,
+      agencyResult: JSON.parse(JSON.stringify(agencyResult[0])).count,
+      dailyEarningResult: JSON.parse(JSON.stringify(dailyEarningResult[0])).sum,
+      monthlyEarningResult: JSON.parse(JSON.stringify(monthlyEarningResult[0]))
+        .sum,
+      yearlyEarningResult: JSON.parse(JSON.stringify(yearlyEarningResult[0]))
+        .sum,
+      totalEarning: JSON.parse(JSON.stringify(totalEarning[0])).sum,
+    };
+
+    res.status(200).json(report);
   } catch (err) {
     next(err);
   }

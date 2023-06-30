@@ -1,4 +1,5 @@
-const { Property } = require("../models");
+const { Property, PurchaseHistory } = require("../models");
+
 const agencyService = require("../services/agencyService");
 const cloudinary = require("../config/cloudinary");
 const fs = require("fs");
@@ -108,9 +109,49 @@ exports.getAllAgency = async (req, res, next) => {
   }
 };
 
+exports.getAgencyById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await agencyService.getAgencyById(id);
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.getAllFromAgency = async (req, res, next) => {
   try {
     const result = await agencyService.getAllFromAgency();
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.deleteProfileAgency = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await agencyService.deleteProfileAgency(id);
+
+    if (result === 0) {
+      throw new Error("Cannot Delete!!");
+    }
+
+    res.status(200).json({ message: "delete success" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getPropertyByAgencyId = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await agencyService.getPropertyByAgencyId(id);
 
     res.status(200).json(result);
   } catch (err) {

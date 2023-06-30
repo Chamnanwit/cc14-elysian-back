@@ -44,3 +44,13 @@ exports.updateAdminForm = (updateForm) =>
 exports.deleteAdminForm = (id) => adminRepository.deleteAdminForm(id);
 
 exports.getAllAdmin = () => adminRepository.getAllAdmin();
+
+exports.getPurchase = () => adminRepository.getPurchase();
+
+exports.getNewUser = () => adminRepository.getNewUser();
+
+exports.getProperty = () => adminRepository.getProperty();
+
+exports.getAgencyResult = () => adminRepository.getAgencyResult();
+
+exports.getEarning = () => adminRepository.getEarning();

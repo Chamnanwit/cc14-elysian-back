@@ -62,10 +62,11 @@ exports.getMe = (req, res, next) => {
 exports.checkMe = async (req, res, next) => {
   const value = req.body;
 
-  const isUserExist = await userService.checkEmailExist(value.email);
-  if (isUserExist) {
-    res.status(200).json({ emaiStatus: "Yes" });
+  const isEmailExist = await userService.checkEmailExist(value.email);
+  console.log(isEmailExist);
+  if (isEmailExist) {
+    res.status(200).json({ emailStatus: "Yes" });
   } else {
-    res.status(200).json({ emaiStatus: "No" });
+    res.status(200).json({ emailStatus: "No" });
   }
 };
