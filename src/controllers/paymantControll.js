@@ -1,5 +1,6 @@
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripe = require("stripe")(stripeSecretKey);
+const { PurchaseHistory } = require("../models")
 
 // const storeItems = new Map([
 //   [1, { priceInCents: 499, price: price_1NMPXDKiz6RxD96BwlvRnN8E, name: "Elysian Gold Package Weekly" }],
@@ -20,6 +21,9 @@ exports.package = async (req, res, next) => {
       // customer: ,
       line_items: [{ price: req.body.id, quantity: 1 }],
       mode: "payment",
+      metadata: {
+        pricingPlanId: req.body.packageId,
+      }
     });
     console.log(data);
     res.json(data);
@@ -42,11 +46,11 @@ exports.packageData = async (req, res, next) => {
       response.session = session;
     }
 
-    //   await Payment.create({
-    //     id: session.id,
-    //     userId: user.id,
-    //   });
-    //   console.log("_______aa", req.query);
+      await PurchaseHistory.create({
+        userId: user.id,
+        paymentStatus: session.status,
+        pricingPlanId: session.metadata.pricingPlanId
+      });
 
     return res.json({
       message: "success",
