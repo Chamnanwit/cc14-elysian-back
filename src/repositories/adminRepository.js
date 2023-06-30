@@ -345,4 +345,14 @@ exports.getEarning = async () => {
   };
 };
 
-exports.getAllPurchaseHistory = () => PurchaseHistory.findAll();
+exports.getAllPurchaseHistory = () =>
+  PurchaseHistory.findAll({
+    include: [
+      {
+        model: PricingPlan,
+      },
+      {
+        model: User,
+      },
+    ],
+  });

@@ -161,5 +161,13 @@ exports.getPurchaseHistoryById = (id) => {
     where: {
       id: id,
     },
+    include: [
+      {
+        model: PricingPlan,
+      },
+      {
+        model: User,
+      },
+    ],
   });
 };
