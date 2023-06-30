@@ -17,7 +17,11 @@ router.get("/all-agency", agencyController.getAllAgency);
 router.delete("/properties/:id", agencyController.deleteProperty);
 
 router.post("/payment", paymentController.package);
+<<<<<<< HEAD
 router.get('/payment/data',authenticateMiddleware ,paymentController.packageData);
+=======
+router.get("/payment/data", paymentController.packageData);
+>>>>>>> c1f7c0e414d5053f798efca4453c0e15fd773ba1
 
 router.patch("/update-profileagency", agencyController.updateProfileAgency);
 router.delete(
