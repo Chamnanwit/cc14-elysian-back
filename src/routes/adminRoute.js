@@ -30,5 +30,6 @@ router.delete("/admin-delete-form/:id", adminController.deleteAdminForm);
 router.get("/all-admin", adminController.getAllAdmin);
 
 router.get("/get-report", adminController.getReport);
+router.get("/get-all-purchase-history", adminController.getAllPurchaseHistory);
 
 module.exports = router;

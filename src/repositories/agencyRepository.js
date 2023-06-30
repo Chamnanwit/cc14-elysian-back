@@ -156,26 +156,18 @@ exports.getPropertyByAgencyId = (id) => {
   });
 };
 
-// include: [
-//   {
-//     model: SubDistrict,
-//     include: [
-//       {
-//         model: District,
-//         include: {
-//           model: Province,
-//         },
-//       },
-//     ],
-//   },
-//   {
-//     model: User,
-//   },
-//   {
-//     model: Optional,
-//     include: OptionalType,
-//   },
-//   {
-//     model: RoomType,
-//   },
-// ],
+exports.getPurchaseHistoryById = (id) => {
+  return PurchaseHistory.findOne({
+    where: {
+      id: id,
+    },
+    include: [
+      {
+        model: PricingPlan,
+      },
+      {
+        model: User,
+      },
+    ],
+  });
+};

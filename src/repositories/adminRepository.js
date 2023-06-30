@@ -207,7 +207,7 @@ exports.getPurchase = async () => {
   const yearlyPurchaseResult = await PurchaseHistory.findAll({
     where: {
       createdAt: { [Op.between]: [startTimeYear, endTimeYear] },
-      paymentStatus: "SUCCESS",
+      paymentStatus: "complete",
     },
     attributes: [[fn("COUNT", literal("*")), "count"]], // literal คือการระบุไปที่คอลัมในฐานข้อมูลโดยตรง ในกรณีที่สามมารถระบุชื่อในโมเดลได้
   });
@@ -215,7 +215,7 @@ exports.getPurchase = async () => {
   const monthlyPurchaseResult = await PurchaseHistory.findAll({
     where: {
       createdAt: { [Op.between]: [startTimeMonth, endTimeMonth] },
-      paymentStatus: "SUCCESS",
+      paymentStatus: "complete",
     },
     attributes: [[fn("COUNT", literal("*")), "count"]],
   });
@@ -223,14 +223,14 @@ exports.getPurchase = async () => {
   const dailyPurchaseResult = await PurchaseHistory.findAll({
     where: {
       createdAt: { [Op.between]: [startTime, endTime] },
-      paymentStatus: "SUCCESS",
+      paymentStatus: "complete",
     },
     attributes: [[fn("COUNT", literal("*")), "count"]],
   });
 
   const totalPurchase = await PurchaseHistory.findAll({
     where: {
-      paymentStatus: "SUCCESS",
+      paymentStatus: "complete",
     },
     attributes: [[fn("COUNT", literal("*")), "count"]],
   });
@@ -293,7 +293,7 @@ exports.getEarning = async () => {
   const dailyEarningResult = await PurchaseHistory.findAll({
     where: {
       createdAt: { [Op.between]: [startTime, endTime] },
-      paymentStatus: "SUCCESS",
+      paymentStatus: "complete",
     },
     attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
     include: {
@@ -305,7 +305,7 @@ exports.getEarning = async () => {
   const monthlyEarningResult = await PurchaseHistory.findAll({
     where: {
       createdAt: { [Op.between]: [startTimeMonth, endTimeMonth] },
-      paymentStatus: "SUCCESS",
+      paymentStatus: "complete",
     },
     attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
     include: {
@@ -317,7 +317,7 @@ exports.getEarning = async () => {
   const yearlyEarningResult = await PurchaseHistory.findAll({
     where: {
       createdAt: { [Op.between]: [startTimeYear, endTimeYear] },
-      paymentStatus: "SUCCESS",
+      paymentStatus: "complete",
     },
     attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
     include: {
@@ -328,7 +328,7 @@ exports.getEarning = async () => {
 
   const totalEarning = await PurchaseHistory.findAll({
     where: {
-      paymentStatus: "SUCCESS",
+      paymentStatus: "complete",
     },
     attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
     include: {
@@ -344,3 +344,15 @@ exports.getEarning = async () => {
     totalEarning,
   };
 };
+
+exports.getAllPurchaseHistory = () =>
+  PurchaseHistory.findAll({
+    include: [
+      {
+        model: PricingPlan,
+      },
+      {
+        model: User,
+      },
+    ],
+  });

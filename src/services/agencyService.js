@@ -26,3 +26,6 @@ exports.deleteProfileAgency = (id) => agencyRepository.deleteProfileAgency(id);
 
 exports.getPropertyByAgencyId = (id) =>
   agencyRepository.getPropertyByAgencyId(id);
+
+exports.getPurchaseHistoryById = (id) =>
+  agencyRepository.getPurchaseHistoryById(id);

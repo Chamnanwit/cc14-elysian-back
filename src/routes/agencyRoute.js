@@ -16,6 +16,12 @@ router.post(
   authenticateMiddleware,
   agencyController.createProperty
 );
+
+router.post(
+  "/propertiesandoptionals",
+  agencyController.createPropertyAndOptional
+);
+
 router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
 router.get("/all-agency", agencyController.getAllAgency);
@@ -33,5 +39,7 @@ router.delete(
 router.get("/agencybyid/:id", agencyController.getAgencyById);
 
 router.get("/propertybyagencyid/:id", agencyController.getPropertyByAgencyId);
+
+router.get("/purchase-history/:id", agencyController.getPurchaseHistoryById);
 
 module.exports = router;

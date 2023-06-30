@@ -3,10 +3,11 @@ module.exports = (sequelize, DataTypes) => {
     "PurchaseHistory",
     {
       paymentStatus: {
-        type: DataTypes.ENUM("PENDING", "SUCCESS"),
+        type: DataTypes.ENUM("PENDING", "complete"),
       },
       orderStatus: {
         type: DataTypes.ENUM("ACTIVE", "EXPRIE"),
+        defaultValue: "ACTIVE",
       },
     },
     {

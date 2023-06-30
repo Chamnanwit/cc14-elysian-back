@@ -1,4 +1,4 @@
-const { Property, PurchaseHistory } = require("../models");
+const { Property, PurchaseHistory, Optional, sequelize } = require("../models");
 
 const agencyService = require("../services/agencyService");
 const cloudinary = require("../config/cloudinary");
@@ -13,6 +13,55 @@ exports.createProperty = async (req, res, next) => {
     res.status(201).json(property);
   } catch (err) {
     next(err);
+  }
+};
+
+exports.createPropertyAndOptional = async (req, res, next) => {
+  const value = req.body;
+  let transaction;
+  try {
+    transaction = await sequelize.transaction();
+    const property = await Property.create(
+      {
+        name: value.name,
+        price: value.price,
+        floor: value.floor,
+        totalArea: value.totalArea,
+        totalUnit: value.totalUnit,
+        totalBedroom: value.totalBedroom,
+        totalBathroom: value.totalBathroom,
+        totalKitchen: value.totalKitchen,
+        description: value.description,
+        latitude: value.latitude,
+        longitude: value.longitude,
+        rentPeriod: value.rentPeriod,
+        locked: value.locked,
+        published: value.published,
+        topStatus: value.topStatus,
+        userId: value.userId,
+        roomTypeId: value.roomTypeId,
+        subDistrictId: value.subDistrictId,
+      },
+      { transaction }
+    );
+
+    const optional = await Optional.create(
+      {
+        propertyId: value.propertyId,
+        optionalTypeId: value.optionalTypeId,
+      },
+      { transaction }
+    );
+    await transaction.commit();
+
+    res.status(200).json({ property, optional });
+  } catch (err) {
+    {
+      console.log("error");
+      if (transaction) {
+        await transaction.rollback();
+      }
+    }
   }
 };
 
@@ -156,6 +205,18 @@ exports.getPropertyByAgencyId = async (req, res, next) => {
     const { id } = req.params;
 
     const result = await agencyService.getPropertyByAgencyId(id);
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getPurchaseHistoryById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await agencyService.getPurchaseHistoryById(id);
 
     res.status(200).json(result);
   } catch (err) {
