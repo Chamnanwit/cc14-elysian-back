@@ -356,3 +356,51 @@ exports.getAllPurchaseHistory = () =>
       },
     ],
   });
+
+exports.getTotalPropertyById = async (id) => {
+  const totalPropertyById = await Property.findAll({
+    where: {
+      id: id,
+    },
+    attributes: [[fn("COUNT", literal("*")), "count"]],
+  });
+  return { totalPropertyById };
+};
+
+exports.getTotalInactiveProperty = async (id) => {
+  const totalInactiveProperty = await Property.findAll({
+    where: {
+      id: id,
+      locked: "FALSE",
+    },
+    attributes: [[fn("COUNT", literal("*")), "count"]],
+  });
+  return { totalInactiveProperty };
+};
+
+exports.getTotalActiveProperty = async (id) => {
+  const totalActiveProperty = await Property.findAll({
+    where: {
+      id: id,
+      locked: "TRUE",
+    },
+    attributes: [[fn("COUNT", literal("*")), "count"]],
+  });
+  return { totalActiveProperty };
+};
+
+// const getTotalActiveProperty = async (id) ={
+//   const TotalActiveProperty =  PurchaseHistory.findAll({
+//     where: {
+//       paymentStatus: "complete",
+//     },
+//     attributes: [[fn("COUNT", literal("*")), "count"]],
+// )}
+
+const TotalActiveProperty = PurchaseHistory.findAll({
+  where: {
+    paymentStatus: "complete",
+  },
+  attributes: [[fn("COUNT", literal("*")), "count"]],
+});
+// return { totalActiveProperty };

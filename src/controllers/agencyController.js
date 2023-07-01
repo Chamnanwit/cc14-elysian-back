@@ -98,7 +98,7 @@ exports.uploadProperty = async (req, res, next) => {
       }
       return uploadMultiFiles;
     };
-    const {  propertyId } = req.params;
+    const { propertyId } = req.params;
     console.log(req.files);
     // console.log("---------------- -p-------------------------",propertyId)
     await multiupload(req.files).then(async (uploadMultiFiles) => {
@@ -115,13 +115,13 @@ exports.uploadProperty = async (req, res, next) => {
   } catch (err) {
     next(err);
   } finally {
-    if(req.files) {
+    if (req.files) {
       for (let file of req.files) {
         fs.unlinkSync(file.path);
       }
     }
   }
-}
+};
 
 exports.deleteProperty = async (req, res, next) => {
   try {
@@ -217,6 +217,16 @@ exports.getPurchaseHistoryById = async (req, res, next) => {
     const { id } = req.params;
 
     const result = await agencyService.getPurchaseHistoryById(id);
+
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getAllSubDistrict = async (req, res, next) => {
+  try {
+    const result = await agencyService.getAllSubDistrict();
 
     res.status(200).json(result);
   } catch (err) {

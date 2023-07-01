@@ -171,3 +171,18 @@ exports.getPurchaseHistoryById = (id) => {
     ],
   });
 };
+
+exports.getAllSubDistrict = () => {
+  return SubDistrict.findAll({
+    include: [
+      {
+        model: District,
+        include: [
+          {
+            model: Province,
+          },
+        ],
+      },
+    ],
+  });
+};

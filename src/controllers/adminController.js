@@ -150,7 +150,7 @@ exports.getAllOptional = async (req, res, next) => {
 
 exports.getOptionalById = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    v;
 
     const result = await adminService.getOptionalById(id);
 
@@ -313,6 +313,24 @@ exports.getAllPurchaseHistory = async (req, res, next) => {
     const result = await adminService.getAllPurchaseHistory();
 
     res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getReportAgentDetailById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const totalPropertyById = await adminService.getTotalPropertyById(id);
+
+    const totalInactiveProperty = await adminService.getTotalInactiveProperty(
+      id
+    );
+
+    const totalActiveProperty = await adminService.getTotalActiveProperty(id);
+
+    res.status(200).json(totalActiveProperty);
   } catch (err) {
     next(err);
   }

@@ -31,5 +31,9 @@ router.get("/all-admin", adminController.getAllAdmin);
 
 router.get("/get-report", adminController.getReport);
 router.get("/get-all-purchase-history", adminController.getAllPurchaseHistory);
+router.get(
+  "/get-report-agent-details/:id",
+  adminController.getReportAgentDetailById
+);
 
 module.exports = router;
