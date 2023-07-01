@@ -139,6 +139,18 @@ exports.deleteProperty = async (req, res, next) => {
   }
 };
 
+exports.updateProperties = async (req, res, next) => {
+  try {
+    const updateProperty = req.body;
+
+    const result = await agencyService.updateProperties(updateProperty);
+
+    res.status(200).json({ message: "update success" });
+  } catch (err) {
+    next;
+  }
+};
+
 exports.updateProfileAgency = async (req, res, next) => {
   try {
     const updateProfile = req.body;

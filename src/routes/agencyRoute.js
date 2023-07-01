@@ -26,6 +26,7 @@ router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
 router.get("/all-agency", agencyController.getAllAgency);
 router.delete("/properties/:id", agencyController.deleteProperty);
+router.patch("/update-properties", agencyController.updateProperties);
 
 router.post("/payment", authenticateMiddleware, paymentController.package);
 router.get(

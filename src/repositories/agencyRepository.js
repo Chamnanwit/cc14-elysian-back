@@ -90,6 +90,14 @@ exports.deleteProperty = (id) => {
   });
 };
 
+exports.updateProperties = (updateProperty) => {
+  return Property.update(updateProperty, {
+    where: {
+      id: updateProperty.id,
+    },
+  });
+};
+
 exports.updateProfileAgency = (updateProfile) => {
   return User.update(updateProfile, {
     where: {
