@@ -148,7 +148,7 @@ exports.getTotalPropertyById = async (id) => {
 exports.getTotalInactiveProperty = async (id) => {
   const totalInactiveProperty = await Property.findAll({
     where: {
-      locked: "FALSE",
+      locked: 1,
     },
     include: [
       {
@@ -167,7 +167,7 @@ exports.getTotalInactiveProperty = async (id) => {
 exports.getTotalActiveProperty = async (id) => {
   const totalActiveProperty = await Property.findAll({
     where: {
-      locked: "TRUE",
+      locked: 0,
     },
     include: [
       {
