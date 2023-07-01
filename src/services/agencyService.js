@@ -21,6 +21,17 @@ exports.getAllAgency = () => agencyRepository.getAllAgency();
 
 exports.getAgencyById = (id) => agencyRepository.getAgencyById(id);
 
+exports.getTotalPropertyById = (id) =>
+  agencyRepository.getTotalPropertyById(id);
+
+exports.getTotalInactiveProperty = (id) =>
+  agencyRepository.getTotalInactiveProperty(id);
+
+exports.getTotalActiveProperty = (id) =>
+  agencyRepository.getTotalActiveProperty(id);
+
+exports.getTotalPurchase = (id) => agencyRepository.getTotalPurchase(id);
+
 exports.getAllFromAgency = () => agencyRepository.getAllFromAgency();
 
 exports.deleteProfileAgency = (id) => agencyRepository.deleteProfileAgency(id);

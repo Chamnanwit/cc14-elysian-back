@@ -10,7 +10,16 @@ const {
   PricingPlan,
   RoomType,
 } = require("../models");
-const { sequelize, Sequelize, fn, Op, literal, col } = require("sequelize");
+
+const {
+  sequelize,
+  Sequelize,
+  fn,
+  Op,
+  literal,
+  col,
+  where,
+} = require("sequelize");
 
 exports.createProperty = (property) => Property.create(property);
 
@@ -110,6 +119,83 @@ exports.getAgencyById = (id) => {
       id: id,
     },
   });
+};
+
+exports.getTotalPropertyById = async (id) => {
+  const totalPropertyById = await Property.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+    ],
+    attributes: [[fn("COUNT", literal("*")), "count"]],
+  });
+  return { totalPropertyById };
+};
+
+exports.getTotalInactiveProperty = async (id) => {
+  const totalInactiveProperty = await Property.findAll({
+    where: {
+      locked: "FALSE",
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+    ],
+    attributes: [[fn("COUNT", literal("*")), "count"]],
+  });
+  return { totalInactiveProperty };
+};
+
+exports.getTotalActiveProperty = async (id) => {
+  const totalActiveProperty = await Property.findAll({
+    where: {
+      locked: "TRUE",
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+    ],
+    attributes: [[fn("COUNT", literal("*")), "count"]],
+  });
+  return { totalActiveProperty };
+};
+
+exports.getTotalPurchase = async (id) => {
+  const totalPurchase = await PurchaseHistory.findAll({
+    where: {
+      paymentStatus: "complete",
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+      {
+        model: PricingPlan,
+        attributes: ["id"],
+      },
+    ],
+    attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
+  });
+  return { totalPurchase };
 };
 
 exports.deleteProfileAgency = (id) => {

@@ -330,7 +330,23 @@ exports.getReportAgentDetailById = async (req, res, next) => {
 
     const totalActiveProperty = await adminService.getTotalActiveProperty(id);
 
-    res.status(200).json(totalActiveProperty);
+    const totalPurchase = await adminService.getTotalPurchase(id);
+
+    const result2 = {
+      totalPropertyById: JSON.parse(
+        JSON.stringify(totalPropertyById.totalPropertyById[0])
+      ).count,
+      totalInactiveProperty: JSON.parse(
+        JSON.stringify(totalInactiveProperty.totalInactiveProperty[0])
+      ).count,
+      totalActiveProperty: JSON.parse(
+        JSON.stringify(totalActiveProperty.totalActiveProperty[0])
+      ).count,
+      totalPurchase: JSON.parse(JSON.stringify(totalPurchase.totalPurchase[0]))
+        .sum,
+    };
+
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }
