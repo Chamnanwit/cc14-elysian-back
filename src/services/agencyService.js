@@ -1,7 +1,8 @@
 const agencyRepository = require("../repositories/agencyRepository");
 const { Image } = require("../models");
 
-exports.createProperty = (property) => userRepository.create(property);
+exports.createProperty = (property) =>
+  agencyRepository.createProperty(property);
 
 exports.uploadMultiFiles = (files) => Image.bulkCreate(files);
 exports.createProperty = (property) =>
@@ -29,3 +30,5 @@ exports.getPropertyByAgencyId = (id) =>
 
 exports.getPurchaseHistoryById = (id) =>
   agencyRepository.getPurchaseHistoryById(id);
+
+exports.getAllSubDistrict = () => agencyRepository.getAllSubDistrict();

@@ -56,3 +56,11 @@ exports.getAgencyResult = () => adminRepository.getAgencyResult();
 exports.getEarning = () => adminRepository.getEarning();
 
 exports.getAllPurchaseHistory = () => adminRepository.getAllPurchaseHistory();
+
+exports.getTotalPropertyById = (id) => adminRepository.getTotalPropertyById(id);
+
+exports.getTotalInactiveProperty = (id) =>
+  adminRepository.getTotalInactiveProperty(id);
+
+exports.getTotalActiveProperty = (id) =>
+  adminRepository.getTotalActiveProperty(id);
