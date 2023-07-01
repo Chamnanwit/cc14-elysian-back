@@ -141,13 +141,27 @@ exports.deleteProperty = async (req, res, next) => {
 
 exports.updateProperties = async (req, res, next) => {
   try {
-    const updateProperty = req.body;
+    const { id } = req.params;
 
-    const result = await agencyService.updateProperties(updateProperty);
+    const result = await agencyService.updateProperties(id);
 
     res.status(200).json({ message: "update success" });
   } catch (err) {
     next;
+  }
+};
+
+exports.getAllImagePropertyById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await agencyService.getAllImagePropertyById(id);
+
+    const rs = { result: result.allImagePropertyById };
+
+    res.status(200).json(rs);
+  } catch (err) {
+    next(err);
   }
 };
 
