@@ -94,7 +94,7 @@ exports.getAllAgency = () =>
     where: {
       role: "AGENCY",
     },
-    order: [["locked", "DESC"]],
+    order: [["locked"]],
   });
 
 exports.getAllFromAgency = () =>
