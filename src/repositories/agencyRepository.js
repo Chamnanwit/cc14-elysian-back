@@ -9,6 +9,7 @@ const {
   PurchaseHistory,
   PricingPlan,
   RoomType,
+  Image,
 } = require("../models");
 
 const {
@@ -90,14 +91,35 @@ exports.deleteProperty = (id) => {
   });
 };
 
-exports.updateProperties = (updateProperty) => {
-  return Property.update(updateProperty, {
+exports.updateProperties = (id) => {
+  return Property.update({
     where: {
-      id: updateProperty.id,
+      id: id,
     },
   });
 };
 
+exports.getAllImagePropertyById = async (id) => {
+  const allImagePropertyById = await Image.findAll({
+    attributes: ["imageLink"],
+    include: [
+      {
+        model: Property,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+    ],
+  });
+  return { allImagePropertyById };
+};
+
+// Image.findAll({
+//   where: {
+//     role: "AGENCY",
+//   },
+// });
 exports.updateProfileAgency = (updateProfile) => {
   return User.update(updateProfile, {
     where: {

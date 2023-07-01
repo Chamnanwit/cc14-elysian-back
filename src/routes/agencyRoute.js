@@ -28,6 +28,11 @@ router.get("/all-agency", agencyController.getAllAgency);
 router.delete("/properties/:id", agencyController.deleteProperty);
 router.patch("/update-properties", agencyController.updateProperties);
 
+router.get(
+  "/get-all-image-property/:id",
+  agencyController.getAllImagePropertyById
+);
+
 router.post("/payment", authenticateMiddleware, paymentController.package);
 router.get(
   "/payment/data",
