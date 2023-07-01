@@ -142,7 +142,6 @@ exports.deleteProperty = async (req, res, next) => {
 exports.updateProfileAgency = async (req, res, next) => {
   try {
     const updateProfile = req.body;
-    // const id = req.params.id;
 
     const result = await agencyService.updateProfileAgency(updateProfile);
 
@@ -168,7 +167,32 @@ exports.getAgencyById = async (req, res, next) => {
 
     const result = await agencyService.getAgencyById(id);
 
-    res.status(200).json(result);
+    const totalPropertyById = await agencyService.getTotalPropertyById(id);
+
+    const totalInactiveProperty = await agencyService.getTotalInactiveProperty(
+      id
+    );
+
+    const totalActiveProperty = await agencyService.getTotalActiveProperty(id);
+
+    const totalPurchase = await agencyService.getTotalPurchase(id);
+
+    const result2 = {
+      result,
+      totalPropertyById: JSON.parse(
+        JSON.stringify(totalPropertyById.totalPropertyById[0])
+      ).count,
+      totalInactiveProperty: JSON.parse(
+        JSON.stringify(totalInactiveProperty.totalInactiveProperty[0])
+      ).count,
+      totalActiveProperty: JSON.parse(
+        JSON.stringify(totalActiveProperty.totalActiveProperty[0])
+      ).count,
+      totalPurchase: JSON.parse(JSON.stringify(totalPurchase.totalPurchase[0]))
+        .sum,
+    };
+
+    res.status(200).json(result2);
   } catch (err) {
     next(err);
   }

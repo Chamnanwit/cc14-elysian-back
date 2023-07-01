@@ -10,7 +10,16 @@ const {
   PricingPlan,
   RoomType,
 } = require("../models");
-const { sequelize, Sequelize, fn, Op, literal, col } = require("sequelize");
+
+const {
+  sequelize,
+  Sequelize,
+  fn,
+  Op,
+  literal,
+  col,
+  where,
+} = require("sequelize");
 
 exports.createPackage = (package) => PricingPlan.create(package);
 
@@ -359,9 +368,15 @@ exports.getAllPurchaseHistory = () =>
 
 exports.getTotalPropertyById = async (id) => {
   const totalPropertyById = await Property.findAll({
-    where: {
-      id: id,
-    },
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+    ],
     attributes: [[fn("COUNT", literal("*")), "count"]],
   });
   return { totalPropertyById };
@@ -370,9 +385,17 @@ exports.getTotalPropertyById = async (id) => {
 exports.getTotalInactiveProperty = async (id) => {
   const totalInactiveProperty = await Property.findAll({
     where: {
-      id: id,
       locked: "FALSE",
     },
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+    ],
     attributes: [[fn("COUNT", literal("*")), "count"]],
   });
   return { totalInactiveProperty };
@@ -381,26 +404,41 @@ exports.getTotalInactiveProperty = async (id) => {
 exports.getTotalActiveProperty = async (id) => {
   const totalActiveProperty = await Property.findAll({
     where: {
-      id: id,
       locked: "TRUE",
     },
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+    ],
     attributes: [[fn("COUNT", literal("*")), "count"]],
   });
   return { totalActiveProperty };
 };
 
-// const getTotalActiveProperty = async (id) ={
-//   const TotalActiveProperty =  PurchaseHistory.findAll({
-//     where: {
-//       paymentStatus: "complete",
-//     },
-//     attributes: [[fn("COUNT", literal("*")), "count"]],
-// )}
-
-const TotalActiveProperty = PurchaseHistory.findAll({
-  where: {
-    paymentStatus: "complete",
-  },
-  attributes: [[fn("COUNT", literal("*")), "count"]],
-});
-// return { totalActiveProperty };
+exports.getTotalPurchase = async (id) => {
+  const totalPurchase = await PurchaseHistory.findAll({
+    where: {
+      paymentStatus: "complete",
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+      {
+        model: PricingPlan,
+        attributes: ["id"],
+      },
+    ],
+    attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
+  });
+  return { totalPurchase };
+};
