@@ -316,6 +316,21 @@ exports.getAllSubDistrict = () => {
   });
 };
 
+exports.getAllProvince = () => {
+  return Province.findAll({
+    include: [
+      {
+        model: District,
+        include: [
+          {
+            model: SubDistrict,
+          },
+        ],
+      },
+    ],
+  });
+};
+
 exports.deleteImageProperty = (id) => {
   return Image.destroy({
     where: { propertyId: id },

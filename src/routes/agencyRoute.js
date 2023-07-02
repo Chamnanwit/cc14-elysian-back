@@ -12,8 +12,9 @@ router.post(
   agencyController.uploadProperty
 );
 
-router.post(
-  "/addProfileImage/:userId",
+router.patch(
+  "/addProfileImage",
+  authenticateMiddleware,
   upload.single("profileImage"),
   agencyController.uploadProfile
 );
@@ -61,5 +62,7 @@ router.get("/propertybyagencyid/:id", agencyController.getPropertyByAgencyId);
 router.get("/purchase-history/:id", agencyController.getPurchaseHistoryById);
 
 router.get("/get-all-sub-district", agencyController.getAllSubDistrict);
+
+router.get("/get-all-province", agencyController.getAllProvince);
 
 module.exports = router;
