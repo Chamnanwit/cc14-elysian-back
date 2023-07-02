@@ -14,7 +14,7 @@ exports.getAllProperty = () => agencyRepository.getAllProperty();
 
 exports.deleteProperty = (id) => agencyRepository.deleteProperty(id);
 
-exports.updateProperties = (id) => agencyRepository.updateProperties(id);
+exports.updatePropertyById = (id) => agencyRepository.updatePropertyById(id);
 
 exports.getAllImagePropertyById = (id) =>
   agencyRepository.getAllImagePropertyById(id);
@@ -49,4 +49,4 @@ exports.getPurchaseHistoryById = (id) =>
 
 exports.getAllSubDistrict = () => agencyRepository.getAllSubDistrict();
 
-exports.deleteImageProperty = (id) => agencyRepository.deleteImageProperty(id)
+exports.deleteImageProperty = (id) => agencyRepository.deleteImageProperty(id);

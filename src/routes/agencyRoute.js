@@ -11,7 +11,7 @@ router.post(
   upload.array("imageLink"),
   agencyController.uploadProperty
 );
-router.delete("/deleteImage/:propertyId", agencyController.deleteImageProperty)
+router.delete("/deleteImage/:propertyId", agencyController.deleteImageProperty);
 router.post(
   "/properties",
   authenticateMiddleware,
@@ -27,7 +27,7 @@ router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
 router.get("/all-agency", agencyController.getAllAgency);
 router.delete("/properties/:id", agencyController.deleteProperty);
-router.patch("/update-properties", agencyController.updateProperties);
+router.patch("/update-property/:id", agencyController.updatePropertyById);
 
 router.get(
   "/get-all-image-property/:id",
