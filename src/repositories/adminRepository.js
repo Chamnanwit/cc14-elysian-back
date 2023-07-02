@@ -356,6 +356,7 @@ exports.getEarning = async () => {
 
 exports.getAllPurchaseHistory = () =>
   PurchaseHistory.findAll({
+    order: [["createdAt", "DESC"]],
     include: [
       {
         model: PricingPlan,
