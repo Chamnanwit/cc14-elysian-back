@@ -285,15 +285,17 @@ exports.getPropertyByAgencyId = (id) => {
 
 exports.getPurchaseHistoryById = (id) => {
   return PurchaseHistory.findOne({
-    where: {
-      id: id,
-    },
+    order: [["createdAt", "DESC"]],
     include: [
       {
         model: PricingPlan,
       },
       {
         model: User,
+        attributes: ["id", "firstName", "lastName"],
+        where: {
+          id: id,
+        },
       },
     ],
   });
