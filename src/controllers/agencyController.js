@@ -10,6 +10,7 @@ const agencyService = require("../services/agencyService");
 const cloudinary = require("../config/cloudinary");
 const fs = require("fs");
 const createError = require("../utils/createError");
+const uploadService = require("../services/uploadService");
 
 exports.createProperty = async (req, res, next) => {
   try {
@@ -132,14 +133,13 @@ exports.uploadProperty = async (req, res, next) => {
 
 exports.uploadProfile = async (req, res, next) => {
   try {
-    console.log(req.file);
-    if (!req.file.profileImage) {
+    if (!req.file) {
       createError("profile image is required");
     }
 
     const updateValue = {};
-    if (req.file.profileImage) {
-      const result = await uploadService.upload(req.file.profileImage[0].path);
+    if (req.file) {
+      const result = await uploadService.upload(req.file.path);
       updateValue.profileImage = result.secure_url;
     }
 
@@ -148,8 +148,8 @@ exports.uploadProfile = async (req, res, next) => {
   } catch (err) {
     next(err);
   } finally {
-    if (req.file.profileImage) {
-      fs.unlinkSync(req.file.profileImage[0].path);
+    if (req.file) {
+      fs.unlinkSync(req.file.path);
     }
   }
 };
