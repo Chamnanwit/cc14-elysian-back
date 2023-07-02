@@ -28,6 +28,9 @@ exports.getAllProperty = () => {
   return Property.findAll({
     include: [
       {
+        model: Image,
+      },
+      {
         model: SubDistrict,
         include: [
           {
@@ -40,6 +43,7 @@ exports.getAllProperty = () => {
       },
       {
         model: User,
+        include: PurchaseHistory,
       },
       {
         model: Optional,
