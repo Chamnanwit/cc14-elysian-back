@@ -26,10 +26,10 @@ exports.createProperty = (property) => Property.create(property);
 
 exports.getAllProperty = () => {
   return Property.findAll({
+    where: {
+      locked: 0,
+    },
     include: [
-      {
-        model: Image,
-      },
       {
         model: SubDistrict,
         include: [
@@ -42,8 +42,14 @@ exports.getAllProperty = () => {
         ],
       },
       {
+        model: Image,
+      },
+      {
         model: User,
         include: PurchaseHistory,
+        where: {
+          locked: 0,
+        },
       },
       {
         model: Optional,
@@ -53,6 +59,7 @@ exports.getAllProperty = () => {
         model: RoomType,
       },
     ],
+    // order: [[Image, "id", "ASC"]],
   });
 };
 
