@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM("PENDING", "complete"),
       },
       orderStatus: {
-        type: DataTypes.ENUM("ACTIVE", "EXPRIE"),
+        type: DataTypes.ENUM("ACTIVE", "EXPIRE"),
         defaultValue: "ACTIVE",
       },
     },
