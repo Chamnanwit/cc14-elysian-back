@@ -284,7 +284,7 @@ exports.getPropertyByAgencyId = (id) => {
 };
 
 exports.getPurchaseHistoryById = (id) => {
-  return PurchaseHistory.findOne({
+  return PurchaseHistory.findAll({
     order: [["createdAt", "DESC"]],
     include: [
       {
