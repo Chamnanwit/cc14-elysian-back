@@ -315,3 +315,9 @@ exports.getAllSubDistrict = () => {
     ],
   });
 };
+
+exports.deleteImageProperty = (id) => {
+  return Image.destroy({
+    where: { propertyId: id }
+  })
+}

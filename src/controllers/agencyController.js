@@ -123,6 +123,17 @@ exports.uploadProperty = async (req, res, next) => {
   }
 };
 
+exports.deleteImageProperty = async (req, res, next) => {
+  try {
+    const { propertyId } = req.params;
+    // console.log(" OOOOOOOO ", propertyId);
+    const deleteImageFileProperty = await agencyService.deleteImageProperty(propertyId);
+    res.json(deleteImageFileProperty);
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.deleteProperty = async (req, res, next) => {
   try {
     const { id } = req.params;
