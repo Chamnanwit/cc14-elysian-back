@@ -284,7 +284,7 @@ exports.getPropertyByAgencyId = (id) => {
 };
 
 exports.getPurchaseHistoryById = (id) => {
-  return PurchaseHistory.findOne({
+  return PurchaseHistory.findAll({
     order: [["createdAt", "DESC"]],
     include: [
       {
@@ -315,3 +315,9 @@ exports.getAllSubDistrict = () => {
     ],
   });
 };
+
+exports.deleteImageProperty = (id) => {
+  return Image.destroy({
+    where: { propertyId: id }
+  })
+}

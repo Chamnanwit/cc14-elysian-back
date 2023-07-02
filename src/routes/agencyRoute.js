@@ -18,7 +18,7 @@ router.post(
   agencyController.uploadProfile
 );
 
-
+router.delete("/deleteImage/:propertyId", agencyController.deleteImageProperty)
 router.post(
   "/properties",
   authenticateMiddleware,
