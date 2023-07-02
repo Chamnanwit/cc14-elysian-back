@@ -11,6 +11,14 @@ router.post(
   upload.array("imageLink"),
   agencyController.uploadProperty
 );
+
+router.post(
+  "/addProfileImage/:userId",
+  upload.single('profileImage'),
+  agencyController.uploadProfile
+);
+
+
 router.post(
   "/properties",
   authenticateMiddleware,
