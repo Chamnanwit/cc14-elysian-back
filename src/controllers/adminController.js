@@ -346,7 +346,7 @@ exports.getReportAgentDetailById = async (req, res, next) => {
         .sum,
     };
 
-    res.status(200).json(result);
+    res.status(200).json(result2);
   } catch (err) {
     next(err);
   }
