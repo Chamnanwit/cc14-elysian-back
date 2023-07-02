@@ -49,4 +49,6 @@ exports.getPurchaseHistoryById = (id) =>
 
 exports.getAllSubDistrict = () => agencyRepository.getAllSubDistrict();
 
+exports.getAllProvince = () => agencyRepository.getAllProvince();
+
 exports.deleteImageProperty = (id) => agencyRepository.deleteImageProperty(id);

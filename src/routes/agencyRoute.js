@@ -11,18 +11,15 @@ router.post(
   upload.array("imageLink"),
   agencyController.uploadProperty
 );
-<<<<<<< HEAD
-router.delete("/deleteImage/:propertyId", agencyController.deleteImageProperty);
-=======
 
-router.post(
-  "/addProfileImage/:userId",
-  upload.single('profileImage'),
+router.patch(
+  "/addProfileImage",
+  authenticateMiddleware,
+  upload.single("profileImage"),
   agencyController.uploadProfile
 );
 
-router.delete("/deleteImage/:propertyId", agencyController.deleteImageProperty)
->>>>>>> 53578f88f659f3f66446517565478b784ea0a03f
+router.delete("/deleteImage/:propertyId", agencyController.deleteImageProperty);
 router.post(
   "/properties",
   authenticateMiddleware,
@@ -65,5 +62,7 @@ router.get("/propertybyagencyid/:id", agencyController.getPropertyByAgencyId);
 router.get("/purchase-history/:id", agencyController.getPurchaseHistoryById);
 
 router.get("/get-all-sub-district", agencyController.getAllSubDistrict);
+
+router.get("/get-all-province", agencyController.getAllProvince);
 
 module.exports = router;
