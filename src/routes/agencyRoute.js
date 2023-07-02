@@ -11,7 +11,18 @@ router.post(
   upload.array("imageLink"),
   agencyController.uploadProperty
 );
+<<<<<<< HEAD
 router.delete("/deleteImage/:propertyId", agencyController.deleteImageProperty);
+=======
+
+router.post(
+  "/addProfileImage/:userId",
+  upload.single('profileImage'),
+  agencyController.uploadProfile
+);
+
+router.delete("/deleteImage/:propertyId", agencyController.deleteImageProperty)
+>>>>>>> 53578f88f659f3f66446517565478b784ea0a03f
 router.post(
   "/properties",
   authenticateMiddleware,

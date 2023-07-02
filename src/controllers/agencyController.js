@@ -1,4 +1,4 @@
-const { Property, PurchaseHistory, Optional, sequelize } = require("../models");
+const { Property,User, PurchaseHistory, Optional, sequelize } = require("../models");
 
 const agencyService = require("../services/agencyService");
 const cloudinary = require("../config/cloudinary");
@@ -122,6 +122,30 @@ exports.uploadProperty = async (req, res, next) => {
     }
   }
 };
+
+exports.uploadProfile = async (req, res, next) => {
+    try {
+      if (!req.files.profileImage) {
+        createError('profile image is required');
+      }
+  
+      const updateValue = {};
+      if (req.files.profileImage) {
+        const result = await uploadService.upload(req.files.profileImage[0].path);
+        updateValue.profileImage = result.secure_url;
+      }
+      
+      await User.update(updateValue, { where: { id: req.user.id } });
+      res.status(200).json(updateValue);
+    } catch (err) {
+      next(err);
+    } finally {
+      if (req.files.profileImage) {
+        fs.unlinkSync(req.files.profileImage[0].path);
+      }
+    }
+};
+
 
 exports.deleteImageProperty = async (req, res, next) => {
   try {
