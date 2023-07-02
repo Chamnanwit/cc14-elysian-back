@@ -102,7 +102,7 @@ exports.deleteProperty = (id) => {
   });
 };
 
-exports.updateProperties = (id) => {
+exports.updatePropertyById = (id) => {
   return Property.update({
     where: {
       id: id,
@@ -318,6 +318,6 @@ exports.getAllSubDistrict = () => {
 
 exports.deleteImageProperty = (id) => {
   return Image.destroy({
-    where: { propertyId: id }
-  })
-}
+    where: { propertyId: id },
+  });
+};

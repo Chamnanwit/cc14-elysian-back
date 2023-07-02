@@ -151,7 +151,9 @@ exports.deleteImageProperty = async (req, res, next) => {
   try {
     const { propertyId } = req.params;
     // console.log(" OOOOOOOO ", propertyId);
-    const deleteImageFileProperty = await agencyService.deleteImageProperty(propertyId);
+    const deleteImageFileProperty = await agencyService.deleteImageProperty(
+      propertyId
+    );
     res.json(deleteImageFileProperty);
   } catch (err) {
     next(err);
@@ -174,11 +176,11 @@ exports.deleteProperty = async (req, res, next) => {
   }
 };
 
-exports.updateProperties = async (req, res, next) => {
+exports.updatePropertyById = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const result = await agencyService.updateProperties(id);
+    const result = await agencyService.updatePropertyById(id);
 
     res.status(200).json({ message: "update success" });
   } catch (err) {
