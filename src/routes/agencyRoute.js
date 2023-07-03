@@ -28,6 +28,8 @@ router.post(
 
 router.post(
   "/propertiesandoptionals",
+  authenticateMiddleware,
+  upload.array("imageLink"),
   agencyController.createPropertyAndOptional
 );
 
