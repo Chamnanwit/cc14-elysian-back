@@ -36,20 +36,40 @@ exports.checkPackageStatus = async () => {
         if (isWeekExpireCheck(result[i].createdAt)) {
           // console.log("zzzz", result[i].id);
           const PurchaseHistoryId = result[i].id;
-          const updateResult = await PurchaseHistory.update({
-            orderStatus: "EXPIRE",
-            where: { id: 13 },
-          });
-          console.log("updateresult", updateResult);
+          // Update Status
+          const updatedRows = await PurchaseHistory.update(
+            {
+              orderStatus: "EXPIRE",
+            },
+            {
+              where: { id: PurchaseHistoryId },
+            }
+          );
+          console.log("kkkkkkweek", updatedRows);
         }
-
-        console.log("Checkkkk week", result[i].createdAt);
-        console.log(isWeekExpireCheck(result[i].createdAt));
+        // console.log("Checkkkk week", result[i].createdAt);
+        // console.log(isWeekExpireCheck(result[i].createdAt));
       } else {
         result[i].PricingPlan.expiration === "MONTHLY";
+        {
+          if (isMouthExpireCheck(result[i].createdAt)) {
+            // console.log("zzzz", result[i].id);
+            const PurchaseHistoryId = result[i].id;
+            // Update Status
+            const updatedRows = await PurchaseHistory.update(
+              {
+                orderStatus: "EXPIRE",
+              },
+              {
+                where: { id: PurchaseHistoryId },
+              }
+            );
+            console.log("kkkkkkmonth", updatedRows);
+          }
+        }
 
-        console.log("Checkkkk mouth", result[i].createdAt);
-        console.log(isMouthExpireCheck(result[i].createdAt));
+        // console.log("Checkkkk month", result[i].createdAt);
+        // console.log(isMouthExpireCheck(result[i].createdAt));
       }
 
       if (!("id" in item)) {
