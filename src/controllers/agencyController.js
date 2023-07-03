@@ -154,6 +154,30 @@ exports.uploadProfile = async (req, res, next) => {
   }
 };
 
+exports.updateProfileAgency = async (req, res, next) => {
+  try {
+    const updateProfile = req.body;
+
+    updateProfile.id = req.user.id;
+
+    const updateValue = {};
+    if (req.file) {
+      const result = await uploadService.upload(req.file.path);
+      updateProfile.profileImage = result.secure_url;
+    }
+
+    const result = await agencyService.updateProfileAgency(updateProfile);
+
+    res.status(200).json({ message: "update success" });
+  } catch (err) {
+    next;
+  } finally {
+    if (req.file) {
+      fs.unlinkSync(req.file.path);
+    }
+  }
+};
+
 exports.deleteImageProperty = async (req, res, next) => {
   try {
     const { propertyId } = req.params;
@@ -206,18 +230,6 @@ exports.getAllImagePropertyById = async (req, res, next) => {
     res.status(200).json(rs);
   } catch (err) {
     next(err);
-  }
-};
-
-exports.updateProfileAgency = async (req, res, next) => {
-  try {
-    const updateProfile = req.body;
-
-    const result = await agencyService.updateProfileAgency(updateProfile);
-
-    res.status(200).json({ message: "update success" });
-  } catch (err) {
-    next;
   }
 };
 

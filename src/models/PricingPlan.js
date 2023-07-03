@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       planType: {
         type: DataTypes.ENUM("FREE", "GOLD", "PREMIUM"),
+        defaultValue: "FREE",
       },
       price: {
         type: DataTypes.DECIMAL(7, 2),
