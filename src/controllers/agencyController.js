@@ -4,6 +4,7 @@ const {
   PurchaseHistory,
   Optional,
   sequelize,
+  Image,
 } = require("../models");
 
 const agencyService = require("../services/agencyService");
@@ -26,48 +27,71 @@ exports.createProperty = async (req, res, next) => {
 
 exports.createPropertyAndOptional = async (req, res, next) => {
   const value = req.body;
+
   let transaction;
   try {
     transaction = await sequelize.transaction();
-    const property = await Property.create(
-      {
-        name: value.name,
-        price: value.price,
-        floor: value.floor,
-        totalArea: value.totalArea,
-        totalUnit: value.totalUnit,
-        totalBedroom: value.totalBedroom,
-        totalBathroom: value.totalBathroom,
-        totalKitchen: value.totalKitchen,
-        description: value.description,
-        latitude: value.latitude,
-        longitude: value.longitude,
-        rentPeriod: value.rentPeriod,
-        locked: value.locked,
-        published: value.published,
-        topStatus: value.topStatus,
-        userId: value.userId,
-        roomTypeId: value.roomTypeId,
-        subDistrictId: value.subDistrictId,
-      },
-      { transaction }
-    );
+    const property = await Property.create(JSON.parse(value.property), {
+      transaction,
+    });
 
-    const optional = await Optional.create(
-      {
-        propertyId: value.propertyId,
-        optionalTypeId: value.optionalTypeId,
-      },
-      { transaction }
-    );
+    const propertyId = property.id;
+
+    const allOptionalType = JSON.parse(value.optional);
+
+    const allOptionalTypeId = Object.keys(allOptionalType);
+
+    for (let optionalTypeId of allOptionalTypeId) {
+      const optional = await Optional.create(
+        {
+          propertyId: propertyId,
+          optionalTypeId: optionalTypeId,
+        },
+        { transaction }
+      );
+    }
+
+    if (req.files.length < 3) {
+      createError("Image is must have at least three images");
+    }
+
+    const multiupload = async (files) => {
+      console.log(files);
+      const uploadMultiFiles = Promise.all(
+        files.map(async (el) => {
+          const result = await cloudinary.uploader.upload(el.path);
+          return result.secure_url;
+        })
+      );
+
+      return uploadMultiFiles;
+    };
+
+    console.log(req.files);
+
+    await multiupload(req.files).then(async (uploadMultiFiles) => {
+      const imgArr = uploadMultiFiles.map((el) => {
+        const obj = { propertyId: propertyId, imageLink: el };
+
+        return obj;
+      });
+
+      await Image.bulkCreate(imgArr, { transaction });
+    });
+
     await transaction.commit();
 
-    res.status(200).json({ property, optional });
+    res.status(200).json({ message: "create success" });
   } catch (err) {
-    {
-      console.log("error");
-      if (transaction) {
-        await transaction.rollback();
+    console.log("error");
+    if (transaction) {
+      await transaction.rollback();
+    }
+    next(err);
+  } finally {
+    if (req.files) {
+      for (let file of req.files) {
+        fs.unlinkSync(file.path);
       }
     }
   }
