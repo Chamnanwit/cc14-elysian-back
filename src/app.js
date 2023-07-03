@@ -4,6 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+const schedule = require("node-schedule");
 
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
@@ -40,6 +41,14 @@ app.use("/search", searchRoute);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
+
+// const jobmidnight = schedule.scheduleJob("0 0 * * *", function () {
+//   console.log("Hello I am cron every 1 minute! 🦶🏼");
+// });
+
+// const job = schedule.scheduleJob("* * * * *", function () {
+//   console.log("Hello I am cron every 1 minute! 🦶🏼");
+// });
 
 const port = process.env.PORT || 8000;
 

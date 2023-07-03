@@ -49,7 +49,12 @@ router.get(
   paymentController.packageData
 );
 
-router.patch("/update-profileagency", agencyController.updateProfileAgency);
+router.patch(
+  "/update-profileagency",
+  authenticateMiddleware,
+  upload.single("profileImage"),
+  agencyController.updateProfileAgency
+);
 router.delete(
   "/delete-profileagency/:id",
   agencyController.deleteProfileAgency

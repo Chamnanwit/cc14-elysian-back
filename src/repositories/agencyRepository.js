@@ -126,11 +126,6 @@ exports.getAllImagePropertyById = async (id) => {
   return { allImagePropertyById };
 };
 
-// Image.findAll({
-//   where: {
-//     role: "AGENCY",
-//   },
-// });
 exports.updateProfileAgency = (updateProfile) => {
   return User.update(updateProfile, {
     where: {
