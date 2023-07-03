@@ -15,6 +15,9 @@ const searchRoute = require("./routes/searchRoute");
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorMiddleware = require("./middlewares/error");
 
+const { checkPackageStatus } = require("./controllers/cronjobController");
+const { cronjob } = require("./utils/croncheck");
+
 const app = express();
 
 app.use(cors());
@@ -41,6 +44,9 @@ app.use("/search", searchRoute);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
+
+// Cronjob
+cronjob(checkPackageStatus);
 
 // const jobmidnight = schedule.scheduleJob("0 0 * * *", function () {
 //   console.log("Hello I am cron every 1 minute! 🦶🏼");
