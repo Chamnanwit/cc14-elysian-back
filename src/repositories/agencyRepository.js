@@ -269,12 +269,10 @@ exports.getPropertyByAgencyId = (id) => {
       },
       {
         model: Property,
-        attributes: ["id"],
         include: Image,
       },
       {
         model: Property,
-        attributes: ["id"],
         include: [
           {
             model: Optional,
