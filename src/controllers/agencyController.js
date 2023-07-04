@@ -233,9 +233,9 @@ exports.deleteProperty = async (req, res, next) => {
 
 exports.updatePropertyById = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const updateProperty = req.body;
 
-    const result = await agencyService.updatePropertyById(id);
+    const result = await agencyService.updatePropertyById(updateProperty);
 
     res.status(200).json({ message: "update success" });
   } catch (err) {

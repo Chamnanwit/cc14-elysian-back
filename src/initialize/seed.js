@@ -1,5 +1,36 @@
 const { RoomType, PricingPlan, OptionalType } = require("../models");
 
+const hashed = bcrypt.hashSync("123456");
+
+sequelize.sync({ force: true }).then(() => {
+  return User.bulkCreate([
+    { name: "Andy", password: hashed },
+    { name: "Bobby", password: hashed },
+    { name: "Candy", password: hashed },
+    { name: "Danny", password: hashed },
+    { name: "Eddy", password: hashed },
+  ]);
+});
+
+const adminSeed = async () => {
+  const adminData = [
+    {
+      firstName: "admin1",
+      lastName: "page",
+      phoneNumber: "0811111111",
+      taxId: "1111111111111",
+      email: "admin111@gmail.com",
+      password: hashed,
+      role: "ADMIN",
+      locked: "FALSE",
+    },
+  ];
+  let res = await User.bulkCreate(adminData);
+  process.exit(0);
+};
+
+adminSeed();
+
 const roomTypeSeed = async () => {
   const roomTypeData = [
     { name: "studio" },
