@@ -332,6 +332,8 @@ exports.getReportAgentDetailById = async (req, res, next) => {
 
     const totalPurchase = await adminService.getTotalPurchase(id);
 
+    const totalTopStatus = await adminService.getTotalTopStatusProperty(id);
+
     const result2 = {
       totalPropertyById: JSON.parse(
         JSON.stringify(totalPropertyById.totalPropertyById[0])
@@ -344,6 +346,9 @@ exports.getReportAgentDetailById = async (req, res, next) => {
       ).count,
       totalPurchase: JSON.parse(JSON.stringify(totalPurchase.totalPurchase[0]))
         .sum,
+      totalTopStatus: JSON.parse(
+        JSON.stringify(totalTopStatus.totalTopStatusProperty[0])
+      ).count,
     };
 
     res.status(200).json(result2);

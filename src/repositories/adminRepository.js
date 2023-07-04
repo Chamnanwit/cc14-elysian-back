@@ -386,7 +386,7 @@ exports.getTotalPropertyById = async (id) => {
 exports.getTotalInactiveProperty = async (id) => {
   const totalInactiveProperty = await Property.findAll({
     where: {
-      locked: "FALSE",
+      locked: "TRUE",
     },
     include: [
       {
@@ -405,7 +405,7 @@ exports.getTotalInactiveProperty = async (id) => {
 exports.getTotalActiveProperty = async (id) => {
   const totalActiveProperty = await Property.findAll({
     where: {
-      locked: "TRUE",
+      locked: "FALSE",
     },
     include: [
       {
@@ -442,4 +442,23 @@ exports.getTotalPurchase = async (id) => {
     attributes: [[fn("SUM", col("PricingPlan.price")), "sum"]],
   });
   return { totalPurchase };
+};
+
+exports.getTotalTopStatusProperty = async (id) => {
+  const totalTopStatusProperty = await Property.findAll({
+    where: {
+      topStatus: "FALSE",
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+        where: {
+          id: id,
+        },
+      },
+    ],
+    attributes: [[fn("COUNT", literal("*")), "count"]],
+  });
+  return { totalTopStatusProperty };
 };

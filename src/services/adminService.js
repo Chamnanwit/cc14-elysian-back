@@ -66,3 +66,6 @@ exports.getTotalActiveProperty = (id) =>
   adminRepository.getTotalActiveProperty(id);
 
 exports.getTotalPurchase = (id) => adminRepository.getTotalPurchase(id);
+
+exports.getTotalTopStatusProperty = (id) =>
+  adminRepository.getTotalTopStatusProperty(id);
