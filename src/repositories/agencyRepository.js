@@ -102,10 +102,10 @@ exports.deleteProperty = (id) => {
   });
 };
 
-exports.updatePropertyById = (id) => {
-  return Property.update({
+exports.updatePropertyById = (updateProperty) => {
+  return Property.update(updateProperty, {
     where: {
-      id: id,
+      id: updateProperty.id,
     },
   });
 };
