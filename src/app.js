@@ -16,7 +16,8 @@ const notFoundMiddleware = require("./middlewares/not-found");
 const errorMiddleware = require("./middlewares/error");
 
 const { checkPackageStatus } = require("./controllers/cronjobController");
-const { cronjob } = require("./utils/croncheck");
+const { dailyReport } = require("./controllers/reportContoller");
+const { checkPackageJob, dailyReportJob } = require("./utils/scheduleCheck");
 
 const app = express();
 
@@ -46,15 +47,9 @@ app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
 // Cronjob
-cronjob(checkPackageStatus);
+checkPackageJob(checkPackageStatus);
 
-// const jobmidnight = schedule.scheduleJob("0 0 * * *", function () {
-//   console.log("Hello I am cron every 1 minute! 🦶🏼");
-// });
-
-// const job = schedule.scheduleJob("* * * * *", function () {
-//   console.log("Hello I am cron every 1 minute! 🦶🏼");
-// });
+dailyReportJob(dailyReport);
 
 const port = process.env.PORT || 8000;
 
