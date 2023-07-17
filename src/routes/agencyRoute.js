@@ -37,7 +37,12 @@ router.get("/properties", agencyController.getAllProperty);
 router.get("/properties/:id", agencyController.getPropertyById);
 router.get("/all-agency", agencyController.getAllAgency);
 router.delete("/properties/:id", agencyController.deleteProperty);
-router.patch("/update-property/:id", agencyController.updatePropertyById);
+router.patch(
+  "/update-property/:id",
+  authenticateMiddleware,
+  upload.array("imageLink"),
+  agencyController.updatePropertyById
+);
 
 router.get(
   "/get-all-image-property/:id",
