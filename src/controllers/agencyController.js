@@ -237,7 +237,7 @@ exports.updatePropertyById = async (req, res, next) => {
 
     const result = await agencyService.updatePropertyById(updateProperty);
 
-    res.status(200).json({ message: "update success" });
+    res.status(200).json(updateProperty);
   } catch (err) {
     next;
   }
