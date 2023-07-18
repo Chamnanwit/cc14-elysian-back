@@ -40,7 +40,7 @@ router.delete("/properties/:id", agencyController.deleteProperty);
 router.patch(
   "/update-property/:id",
   authenticateMiddleware,
-  upload.array("imageLink"),
+  // upload.array("imageLink"),
   agencyController.updatePropertyById
 );
 
