@@ -249,26 +249,108 @@ exports.updatePropertyById = async (req, res, next) => {
   }
 };
 
-exports.updateProperties = async (req, res, next) => {
+// exports.updateProperties = async (req, res, next) => {
+//   try {
+//     const updateProperty = req.body;
+
+//     updateProperty.id = req.user.id;
+
+//     const updateValue = {};
+//     if (req.file) {
+//       const result = await uploadService.upload(req.file.path);
+//       updateProfile.profileImage = result.secure_url;
+//     }
+
+//     const result = await agencyService.updateProperties(updateProperty);
+
+//     res.status(200).json({ message: "update success" });
+//   } catch (err) {
+//     next;
+//   } finally {
+//     if (req.file) {
+//       fs.unlinkSync(req.file.path);
+//     }
+//   }
+// };
+
+exports.updatePropertyAndOptional = async (req, res, next) => {
+  const { propertyId } = req.params; // Assuming propertyId is passed as a parameter
+
+  const updatedValue = req.body; // Assuming the updated data is sent in the request body
+
+  let transaction;
   try {
-    const updateProperty = req.body;
+    transaction = await sequelize.transaction();
 
-    updateProperty.id = req.user.id;
+    // Update the Property record
+    await Property.update(JSON.parse(updatedValue.property), {
+      where: { id: propertyId }, // Assuming you have an 'id' field in the Property model
+      transaction,
+    });
 
-    const updateValue = {};
-    if (req.file) {
-      const result = await uploadService.upload(req.file.path);
-      updateProfile.profileImage = result.secure_url;
+    // Delete all existing Optionals for the given Property
+    await Optional.destroy({
+      where: { propertyId },
+      transaction,
+    });
+
+    // Insert new Optionals based on the updated data
+    const allOptionalType = JSON.parse(updatedValue.optional);
+    const allOptionalTypeId = Object.keys(allOptionalType);
+
+    for (let optionalTypeId of allOptionalTypeId) {
+      await Optional.create(
+        {
+          propertyId: propertyId,
+          optionalTypeId: optionalTypeId,
+        },
+        { transaction }
+      );
     }
 
-    const result = await agencyService.updateProperties(updateProperty);
+    // Check if there are at least three images in the request
+    if (req.files.length < 3) {
+      createError("Image must have at least three images");
+    }
+
+    const multiupload = async (files) => {
+      console.log(files);
+      const uploadMultiFiles = Promise.all(
+        files.map(async (el) => {
+          const result = await cloudinary.uploader.upload(el.path);
+          return result.secure_url;
+        })
+      );
+
+      return uploadMultiFiles;
+    };
+
+    console.log(req.files);
+
+    // Upload and insert images for the updated Property
+    await multiupload(req.files).then(async (uploadMultiFiles) => {
+      const imgArr = uploadMultiFiles.map((el) => {
+        const obj = { propertyId: propertyId, imageLink: el };
+        return obj;
+      });
+
+      await Image.bulkCreate(imgArr, { transaction });
+    });
+
+    await transaction.commit();
 
     res.status(200).json({ message: "update success" });
   } catch (err) {
-    next;
+    console.log("error");
+    if (transaction) {
+      await transaction.rollback();
+    }
+    next(err);
   } finally {
-    if (req.file) {
-      fs.unlinkSync(req.file.path);
+    if (req.files) {
+      for (let file of req.files) {
+        fs.unlinkSync(file.path);
+      }
     }
   }
 };
