@@ -44,11 +44,11 @@ router.patch(
   agencyController.updatePropertyById
 );
 
-router.patch(
-  "/update-properties",
+router.put(
+  "/properties/:propertyId",
   authenticateMiddleware,
-  upload.single("profileImage"),
-  agencyController.updateProperties
+  upload.array("imageLink"),
+  agencyController.updatePropertyAndOptional
 );
 
 router.get(
