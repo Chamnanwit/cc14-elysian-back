@@ -249,6 +249,30 @@ exports.updatePropertyById = async (req, res, next) => {
   }
 };
 
+exports.updateProperties = async (req, res, next) => {
+  try {
+    const updateProperty = req.body;
+
+    updateProperty.id = req.user.id;
+
+    const updateValue = {};
+    if (req.file) {
+      const result = await uploadService.upload(req.file.path);
+      updateProfile.profileImage = result.secure_url;
+    }
+
+    const result = await agencyService.updateProperties(updateProperty);
+
+    res.status(200).json({ message: "update success" });
+  } catch (err) {
+    next;
+  } finally {
+    if (req.file) {
+      fs.unlinkSync(req.file.path);
+    }
+  }
+};
+
 exports.getAllImagePropertyById = async (req, res, next) => {
   try {
     const { id } = req.params;

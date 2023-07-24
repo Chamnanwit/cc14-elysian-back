@@ -17,6 +17,9 @@ exports.deleteProperty = (id) => agencyRepository.deleteProperty(id);
 exports.updatePropertyById = (updateProperty) =>
   agencyRepository.updatePropertyById(updateProperty);
 
+exports.updateProperties = (updateProperty) =>
+  agencyRepository.updateProperties(updateProperty);
+
 exports.getAllImagePropertyById = (id) =>
   agencyRepository.getAllImagePropertyById(id);
 

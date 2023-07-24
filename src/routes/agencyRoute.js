@@ -44,6 +44,13 @@ router.patch(
   agencyController.updatePropertyById
 );
 
+router.patch(
+  "/update-properties",
+  authenticateMiddleware,
+  upload.single("profileImage"),
+  agencyController.updateProperties
+);
+
 router.get(
   "/get-all-image-property/:id",
   agencyController.getAllImagePropertyById

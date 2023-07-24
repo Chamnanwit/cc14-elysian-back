@@ -110,6 +110,14 @@ exports.updatePropertyById = (updateProperty) => {
   });
 };
 
+exports.updateProperties = (updateProperty) => {
+  return Property.update(updateProperty, {
+    where: {
+      id: updateProperty.id,
+    },
+  });
+};
+
 exports.getAllImagePropertyById = async (id) => {
   const allImagePropertyById = await Image.findAll({
     attributes: ["imageLink"],
