@@ -447,7 +447,7 @@ exports.getTotalPurchase = async (id) => {
 exports.getTotalTopStatusProperty = async (id) => {
   const totalTopStatusProperty = await Property.findAll({
     where: {
-      topStatus: "FALSE",
+      topStatus: "TRUE",
     },
     include: [
       {
