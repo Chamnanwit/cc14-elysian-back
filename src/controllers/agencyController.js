@@ -274,7 +274,7 @@ exports.updatePropertyById = async (req, res, next) => {
 // };
 
 exports.updatePropertyAndOptional = async (req, res, next) => {
-  const { propertyId } = req.params; // Assuming propertyId is passed as a parameter
+  // const { propertyId } = req.params; // Assuming propertyId is passed as a parameter
 
   const updatedValue = req.body; // Assuming the updated data is sent in the request body
 
@@ -282,11 +282,15 @@ exports.updatePropertyAndOptional = async (req, res, next) => {
   try {
     transaction = await sequelize.transaction();
 
+    const propertyId = req.params.id;
+
     // Update the Property record
-    await Property.update(JSON.parse(updatedValue.property), {
-      where: { id: propertyId }, // Assuming you have an 'id' field in the Property model
-      transaction,
-    });
+    if (updatedValue.property) {
+      await Property.update(JSON.parse(updatedValue.property), {
+        where: { id: propertyId }, // Assuming you have an 'id' field in the Property model
+        transaction,
+      });
+    }
 
     // Delete all existing Optionals for the given Property
     await Optional.destroy({
@@ -308,13 +312,8 @@ exports.updatePropertyAndOptional = async (req, res, next) => {
       );
     }
 
-    // Check if there are at least three images in the request
-    if (req.files.length < 3) {
-      createError("Image must have at least three images");
-    }
-
     const multiupload = async (files) => {
-      console.log(files);
+      // console.log(files);
       const uploadMultiFiles = Promise.all(
         files.map(async (el) => {
           const result = await cloudinary.uploader.upload(el.path);
@@ -325,23 +324,30 @@ exports.updatePropertyAndOptional = async (req, res, next) => {
       return uploadMultiFiles;
     };
 
-    console.log(req.files);
+    console.log(req.files, "testtt");
 
-    // Upload and insert images for the updated Property
-    await multiupload(req.files).then(async (uploadMultiFiles) => {
-      const imgArr = uploadMultiFiles.map((el) => {
-        const obj = { propertyId: propertyId, imageLink: el };
-        return obj;
-      });
-
-      await Image.bulkCreate(imgArr, { transaction });
-    });
+    const uploadMultiFiles = await multiupload(req.files);
+    const imageId = req.body.imageId;
+    for (let i = 0; i < uploadMultiFiles.length; i++) {
+      if (imageId[i]) {
+        await Image.update(
+          { imageLink: uploadMultiFiles[i] },
+          { where: { id: imageId[i] } }
+        );
+      } else {
+        await Image.create({ imageLink: uploadMultiFiles[i], propertyId });
+      }
+    }
 
     await transaction.commit();
 
-    res.status(200).json({ message: "update success" });
+    res.status(200).json({
+      message: "update success",
+      uploadMultiFiles,
+      images: req.body.imageId,
+    });
   } catch (err) {
-    console.log("error");
+    console.log(err);
     if (transaction) {
       await transaction.rollback();
     }
