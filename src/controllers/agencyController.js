@@ -282,7 +282,7 @@ exports.updatePropertyAndOptional = async (req, res, next) => {
   try {
     transaction = await sequelize.transaction();
 
-    const propertyId = req.params.id;
+    const propertyId = req.body.id;
 
     // Update the Property record
     if (updatedValue.property) {
