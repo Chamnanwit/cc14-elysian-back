@@ -45,7 +45,7 @@ router.patch(
 );
 
 router.put(
-  "/properties/:id",
+  "/update-properties",
   authenticateMiddleware,
   upload.array("imageLink"),
   agencyController.updatePropertyAndOptional
